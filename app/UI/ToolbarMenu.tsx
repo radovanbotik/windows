@@ -12,7 +12,7 @@ function MenuItem({
 }: {
   name: string;
   value?: string;
-  handleSelect: (value: string) => void;
+  handleSelect?: (value: string) => void;
 }) {
   return (
     <Menu.Item>
@@ -24,7 +24,7 @@ function MenuItem({
             "w-full"
           )}
           onClick={() => {
-            if (value) handleSelect(value);
+            if (value && handleSelect) handleSelect(value);
             return;
           }}
           {...props}
@@ -56,7 +56,7 @@ export default function ToolbarMenu({
   className?: string;
   actions: { name: string; href?: string }[];
   children: ReactNode;
-  handleSelect: (value: string) => void;
+  handleSelect?: (value: string) => void;
 }) {
   return (
     <Menu as="div" className={clsx(className, "relative inline-block text-left")}>
