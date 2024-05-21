@@ -5,7 +5,7 @@ import wm from "../../../public/icons/wm48.png";
 import file from "../../../public/icons/file32.png";
 import Icon from "@/app/UI/Icon";
 
-export const icons = [
+const icons = [
   {
     name: "Inbox",
     href: "/inbox",

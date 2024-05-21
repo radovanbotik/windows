@@ -169,8 +169,8 @@ function TextPreferences({
   return (
     <div className="flex flex-wrap p-1 gap-2 items-center ">
       <div className="flex gap-2 flex-wrap ">
-        <Select options={fonts} value={font} onChange={handleChangeFont} />
-        <Select options={sizes} value={size} onChange={handleChangeSize} />
+        <Select options={fonts} value={font.value} onChange={handleChangeFont} />
+        <Select options={sizes} value={size.value} onChange={handleChangeSize} />
       </div>
       <div className="flex ">
         <Button
@@ -569,8 +569,8 @@ export default function page() {
   const [bold, setBold] = useState(false);
   const [italics, setItalics] = useState(false);
   const [underlined, setUnderlined] = useState(false);
-  const [font, setFont] = useState(fonts[0]);
-  const [size, setSize] = useState(sizes[1]);
+  const [font, setFont] = useState<Font>(fonts[0]);
+  const [size, setSize] = useState<Size>(sizes[1]);
 
   function handleChangeFont(e: ChangeEvent<HTMLSelectElement>) {
     const font = fonts.find(option => option.value === e.target.value);

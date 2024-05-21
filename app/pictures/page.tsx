@@ -80,7 +80,8 @@ export default function page() {
     setSelectedImage(image);
   }
 
-  function handleSelectView(value: "tiles" | "list") {
+  function handleSelectView(value: string) {
+    if (value !== "tiles" || "list") return;
     setView(value);
   }
 
