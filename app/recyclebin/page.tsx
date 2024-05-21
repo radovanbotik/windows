@@ -4,7 +4,7 @@ import directory from "../../public/icons/directory48.png";
 import file from "../../public/icons/file32.png";
 import Icon from "../UI/Icon";
 
-export const icons = [
+const icons = [
   {
     name: "University Degree",
     href: "#",

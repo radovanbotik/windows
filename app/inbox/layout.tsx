@@ -167,24 +167,22 @@ function Body({ children }: { children: ReactNode }) {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="w-full h-[calc(100vh-34px)]">
-      <Window className="w-full h-full">
-        <Window.Header>Inbox</Window.Header>
-        <Window.Toolbar>
-          <Navbar />
-          <Quicklinks />
-        </Window.Toolbar>
-        <Window.Body
-          variant="window"
-          className="bg-windows-white  border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]"
-        >
-          <Body>{children}</Body>
-        </Window.Body>
-        <Window.Footer className="flex gap-1">
-          <div className="w-2/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
-          <div className="w-1/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
-        </Window.Footer>
-      </Window>
-    </div>
+    <Window className="w-full h-[calc(100vh-34px)]">
+      <Window.Header>Inbox</Window.Header>
+      <Window.Toolbar>
+        <Navbar />
+        <Quicklinks />
+      </Window.Toolbar>
+      <Window.Body
+        variant="window"
+        className="bg-windows-white  border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]"
+      >
+        <Body>{children}</Body>
+      </Window.Body>
+      <Window.Footer className="flex gap-1">
+        <div className="w-2/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
+        <div className="w-1/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
+      </Window.Footer>
+    </Window>
   );
 }

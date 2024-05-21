@@ -104,34 +104,32 @@ export default function page() {
 
   return (
     <>
-      <div className="w-full h-[calc(100vh-34px)]">
-        <Window className="w-full h-full">
-          <Window.Header>Pictures</Window.Header>
-          <Window.Toolbar>
-            {viewOptions.map(option => (
-              <ToolbarMenu key={option.name} actions={option.actions} handleSelect={handleSelectView}>
-                {option.name}
-              </ToolbarMenu>
+      <Window className="w-full h-[calc(100vh-34px)]">
+        <Window.Header>Pictures</Window.Header>
+        <Window.Toolbar>
+          {viewOptions.map(option => (
+            <ToolbarMenu key={option.name} actions={option.actions} handleSelect={handleSelectView}>
+              {option.name}
+            </ToolbarMenu>
+          ))}
+        </Window.Toolbar>
+        <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]">
+          <div
+            className={clsx(
+              "w-full h-full flex  flex-wrap content-start px-2",
+              view === "tiles" ? "flex-row gap-4" : "flex-col gap-1"
+            )}
+          >
+            {pictures.map(picture => (
+              <Tile variant={view} key={picture.name} {...picture} handleClick={handleClick} />
             ))}
-          </Window.Toolbar>
-          <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]">
-            <div
-              className={clsx(
-                "w-full h-full flex  flex-wrap content-start px-2",
-                view === "tiles" ? "flex-row gap-4" : "flex-col gap-1"
-              )}
-            >
-              {pictures.map(picture => (
-                <Tile variant={view} key={picture.name} {...picture} handleClick={handleClick} />
-              ))}
-            </div>
-          </Window.Body>
-          <Window.Footer className="flex gap-1">
-            <div className="w-2/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
-            <div className="w-1/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
-          </Window.Footer>
-        </Window>
-      </div>
+          </div>
+        </Window.Body>
+        <Window.Footer className="flex gap-1">
+          <div className="w-2/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
+          <div className="w-1/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
+        </Window.Footer>
+      </Window>
       {selectedImage && (
         <ImageViewer
           title={`Preview of ${selectedImage.name}`}
