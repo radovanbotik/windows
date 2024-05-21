@@ -1,113 +1,133 @@
-import Image from "next/image";
+"use client";
+import Modal from "./UI/Modal";
+import Button from "./UI/Button";
 
-export default function Home() {
+import { Fira_Sans } from "next/font/google";
+import { FormEvent, useEffect, useState } from "react";
+import Image from "next/image";
+import me from "../public/images/me.jpg";
+const firaSans = Fira_Sans({ weight: ["400", "500", "600", "700", "800", "900"], subsets: ["latin"] });
+
+function ModalBody({
+  handleDoNotDisplay,
+  setIsOpen,
+}: {
+  handleDoNotDisplay: (e: FormEvent) => void;
+  setIsOpen: (arg0: boolean) => void;
+}) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className="flex gap-8 max-w-lg">
+      {/* body */}
+      <div className="w-1/2 flex flex-col">
+        <div className="flex-auto p-1 shadow-[inset_0px_2px_2px_0px_#1a202c,inset_0px_-2px_2px_0px_#f7fafc]  bg-windows-white">
+          <div className="h-full w-full">
+            <Image src={me} alt="radovan botik" width={2708} height={1855} className="object-cover w-full h-full" />
+          </div>
+        </div>
+        <div className="pt-4 px-1">
+          <form onChange={handleDoNotDisplay}>
+            <fieldset>
+              <legend className="sr-only">Notifications</legend>
+              <div className="relative flex items-start">
+                <div className="flex h-6 items-center">
+                  <input
+                    id="comments"
+                    aria-describedby="comments-description"
+                    name="comments"
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    // onChange={(e)=>console.log(e.target.value)}
+                  />
+                </div>
+                <div className="ml-3 text-sm leading-6">
+                  <span id="comments-description" className="text-gray-500">
+                    Do not display again.
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+          </form>
         </div>
       </div>
+      {/* buttons */}
+      <div className="w-1/2 flex flex-col gap-2">
+        <Button
+          variant="system"
+          href={"/cv"}
+          className="px-10 py-1 capitalize w-full text-center"
+          onClick={() => setIsOpen(false)}
+        >
+          Display CV
+        </Button>
+        <Button
+          variant="system"
+          href={"/media-player"}
+          className="px-10 py-1 capitalize w-full text-center"
+          onClick={() => setIsOpen(false)}
+        >
+          Play My Music
+        </Button>
+        <Button variant="system" className="px-10 py-1 capitalize w-full text-center" onClick={() => setIsOpen(false)}>
+          About
+        </Button>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+        <div className="relative mt-2 ">
+          <div className="absolute inset-0 flex items-center " aria-hidden="true">
+            <div className="w-full border-t-2 border-gray-300 " />
+          </div>
+        </div>
+        <Button variant="system" className="px-10 py-1 capitalize w-full text-center" onClick={() => setIsOpen(false)}>
+          Close
+        </Button>
       </div>
+    </div>
+  );
+}
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+function ModalDescription() {
+  return (
+    <h1 className="text-3xl font-bold">
+      <span>Welcome to </span>
+      <span className="text-white font-normal">my</span>
+      <span className={`${firaSans.className} inline-block align-bottom`}>Computer</span>
+    </h1>
+  );
+}
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+export default function Home() {
+  const [isOpen, setIsOpen] = useState(true);
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+  function shouldShow() {
+    const show = localStorage.getItem("show");
+    if (show === "false") return setIsOpen(false);
+    return setIsOpen(true);
+  }
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+  function handleDoNotDisplay(e: FormEvent) {
+    if (e.target instanceof HTMLInputElement) {
+      console.log(e.target.checked);
+      const isChecked = e.target.checked;
+      if (isChecked) {
+        localStorage.setItem("show", "false");
+      }
+      if (!isChecked) {
+        localStorage.removeItem("show");
+      }
+    }
+  }
+
+  useEffect(() => {
+    shouldShow();
+  }, []);
+  return (
+    <div className="w-full h-full relative">
+      <Modal
+        title="Welcome"
+        description={<ModalDescription />}
+        body={<ModalBody setIsOpen={setIsOpen} handleDoNotDisplay={handleDoNotDisplay} />}
+        open={isOpen}
+        setIsOpen={setIsOpen}
+      />
+    </div>
   );
 }

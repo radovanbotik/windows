@@ -8,13 +8,38 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      order: {
+        13: "13",
+      },
+      colors: {
+        windows: {
+          gray: "#BFB8BF",
+          white: "#E4DFE6",
+          blue: "#05167F",
+        },
+        "windows-border": {
+          light: "#676767",
+        },
+        "windows-gray": {
+          100: "#FEFEFE",
+          200: "#C1C1C1",
+          300: "#D9D9D9",
+          900: "#343434",
+        },
+        "windows-green": {
+          light: "#008080",
+        },
+      },
+      borderColor: {},
+      boxShadow: {
+        "top-left": "1px 1px 0px #5a5a5a,-1px -1px 0px #ffffff;",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };
 export default config;

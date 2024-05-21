@@ -1,0 +1,44 @@
+"use client";
+import { Window } from "../UI/Window";
+import directory from "../../public/icons/directory48.png";
+import file from "../../public/icons/file32.png";
+import Icon from "../UI/Icon";
+
+export const icons = [
+  {
+    name: "University Degree",
+    href: "#",
+    icon: directory,
+  },
+  {
+    name: "About",
+    href: "#",
+    icon: file,
+  },
+];
+
+export default function page() {
+  return (
+    <div className="w-full h-[calc(100vh-34px)]">
+      <Window className="w-full h-full">
+        <Window.Header>Recycle Bin</Window.Header>
+        <Window.Toolbar>
+          <p className="first-letter:underline">Hello</p>
+        </Window.Toolbar>
+        <Window.Body className="p-2">
+          <div className="w-full h-full flex  gap-4 flex-wrap content-start px-2">
+            {icons.map((icon, index) => {
+              return <Icon key={icon.name} {...icon} />;
+            })}
+          </div>
+        </Window.Body>
+        <Window.Footer className="flex gap-1">
+          <div className="w-2/3 h-6 mt-1 px-2 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]">
+            <span className="text-sm">{icons.length} object(s)</span>
+          </div>
+          <div className="w-1/3 h-6 mt-1 px-2 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
+        </Window.Footer>
+      </Window>
+    </div>
+  );
+}
