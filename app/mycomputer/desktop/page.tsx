@@ -5,35 +5,34 @@ import wm from "../../../public/icons/wm48.png";
 import file from "../../../public/icons/file32.png";
 import Icon from "@/app/UI/Icon";
 
-const icons = [
-  {
-    name: "Inbox",
-    href: "/inbox",
-    icon: mailbox,
-  },
-  {
-    name: "Recycle Bin",
-    href: "/recyclebin",
-    icon: recyclebinfull,
-  },
-  {
-    name: "Pictures",
-    href: "/pictures",
-    icon: directory,
-  },
-  {
-    name: "CV",
-    href: "/cv",
-    icon: file,
-  },
-  {
-    name: "Media Player",
-    href: "/media-player",
-    icon: wm,
-  },
-];
-
 export default function Page() {
+  const icons = [
+    {
+      name: "Inbox",
+      href: "/inbox",
+      icon: mailbox,
+    },
+    {
+      name: "Recycle Bin",
+      href: "/recyclebin",
+      icon: recyclebinfull,
+    },
+    {
+      name: "Pictures",
+      href: "/pictures",
+      icon: directory,
+    },
+    {
+      name: "CV",
+      href: "/cv",
+      icon: file,
+    },
+    {
+      name: "Media Player",
+      href: "/media-player",
+      icon: wm,
+    },
+  ];
   return (
     <div>
       {icons.map((icon, index) => {

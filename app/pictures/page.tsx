@@ -81,8 +81,9 @@ export default function page() {
   }
 
   function handleSelectView(value: string) {
-    if (value !== "tiles" || "list") return;
-    setView(value);
+    console.log(value);
+    if (value === "tiles" || value === "list") setView(value);
+    return;
   }
 
   const viewOptions = [
@@ -112,7 +113,6 @@ export default function page() {
                 {option.name}
               </ToolbarMenu>
             ))}
-            {/* <ToolbarMenu actions={[{ name: "View as tiles", href: "#" }]}>View</ToolbarMenu> */}
           </Window.Toolbar>
           <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]">
             <div

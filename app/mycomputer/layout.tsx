@@ -4,14 +4,13 @@ import { Window } from "../UI/Window";
 import { usePathname } from "next/navigation";
 import ToolbarMenu from "../UI/ToolbarMenu";
 
-const actions = [
-  {
-    name: "Hide URL",
-    href: "#",
-  },
-];
-
 export default function layout({ children }: { children: ReactNode }) {
+  const actions = [
+    {
+      name: "Hide URL",
+      href: "#",
+    },
+  ];
   const pathname = usePathname();
 
   return (

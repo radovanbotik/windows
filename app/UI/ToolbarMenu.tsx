@@ -15,7 +15,13 @@ function MenuItem({
   handleSelect?: (value: string) => void;
 }) {
   return (
-    <Menu.Item>
+    <Menu.Item
+      as="div"
+      onClick={() => {
+        if (value && handleSelect) return handleSelect(value);
+        return;
+      }}
+    >
       {({ active }) => (
         <Button
           className={clsx(
@@ -23,10 +29,6 @@ function MenuItem({
             "px-2 py-1 text-sm flex gap-2 items-center",
             "w-full"
           )}
-          onClick={() => {
-            if (value && handleSelect) handleSelect(value);
-            return;
-          }}
           {...props}
         >
           <span>{name}</span>
