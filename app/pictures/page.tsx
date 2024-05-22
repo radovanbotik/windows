@@ -7,7 +7,6 @@ import rado from "../../public/pictures/rado.jpg";
 import szeged from "../../public/pictures/szeged.jpg";
 import vienna from "../../public/pictures/vienna.jpg";
 import Image, { StaticImageData } from "next/image";
-import ImageViewer from "../UI/ImageViewer";
 import { ComponentPropsWithoutRef, useState } from "react";
 import ToolbarMenu from "../UI/ToolbarMenu";
 import clsx from "clsx";
