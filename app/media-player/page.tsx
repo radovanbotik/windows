@@ -5,6 +5,7 @@ import { getPlaylist } from "../lib/spotify";
 import Image from "next/image";
 import play from "../../public/icons/player/play50.png";
 import clsx from "clsx";
+import Modal from "../UI/Modal";
 
 type SpotifyPlaylist = {
   id: string;
@@ -16,7 +17,8 @@ type SpotifyPlaylist = {
 
 export default function Page() {
   const [tracks, setTracks] = useState<{ track: SpotifyPlaylist }[] | null>(null);
-  const [currentTrack, setCurrentTrack] = useState<string | null>(null);
+  const [currentTrack, setCurrentTrack] = useState<{ name: string; src: string } | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     async function fetch() {
@@ -30,15 +32,16 @@ export default function Page() {
   if (!tracks) return <p>loading...</p>;
 
   return (
-    <div className="flex justify-between w-full h-full ">
-      <ul>
+    <div className="flex flex-wrap justify-between w-full h-full">
+      <ul className="flex flex-col  h-full">
         {tracks.map((item, i: number) => (
           <li
             key={item.track.id}
             className={clsx(`flex flex-wrap group cursor-pointer`, !item.track.preview_url && "cursor-not-allowed")}
             onClick={() => {
               if (item.track.preview_url) {
-                setCurrentTrack(item.track.preview_url);
+                setCurrentTrack({ name: item.track.name, src: item.track.preview_url });
+                setIsOpen(true);
               }
               return;
             }}
@@ -56,7 +59,10 @@ export default function Page() {
                 width={50}
                 height={50}
                 alt="play track"
-                className={`absolute inset-0 opacity-0 group-hover:opacity-80`}
+                className={clsx(
+                  !item.track.preview_url && "hidden cursor-not-allowed",
+                  `absolute inset-0 opacity-0 group-hover:opacity-80`
+                )}
               />
             </div>
             <div>
@@ -66,7 +72,15 @@ export default function Page() {
           </li>
         ))}
       </ul>
-      <AudioPlayer src={currentTrack} />
+      {currentTrack && (
+        <Modal
+          body={<AudioPlayer src={currentTrack.src} />}
+          description={`Playing ${currentTrack.name}`}
+          title="Media Player v1.0"
+          open={isOpen}
+          setIsOpen={setIsOpen}
+        />
+      )}
     </div>
   );
 }

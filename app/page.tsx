@@ -86,7 +86,7 @@ function ModalBody({
 
 function ModalDescription() {
   return (
-    <h1 className="text-3xl font-bold">
+    <h1 className="text-3xl font-bold my-4 ">
       <span>Welcome to </span>
       <span className="text-white font-normal">my</span>
       <span className={`${firaSans.className} inline-block align-bottom`}>Computer</span>

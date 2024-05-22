@@ -59,7 +59,7 @@ Window.Body = function WindowBody({
     <div
       className={clsx(
         className,
-        "flex-auto bg-windows-white mx-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]",
+        "flex-auto  overflow-y-auto bg-windows-white mx-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]",
         variant && bodyVariants[variant]
       )}
     >

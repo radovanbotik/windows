@@ -31,7 +31,7 @@ export default function ImageViewer({
               </Button>
             </div>
           </Dialog.Title>
-          <div className="p-2">
+          <div className="p-1">
             {description && (
               <Dialog.Description className="my-4" as="div">
                 {description}

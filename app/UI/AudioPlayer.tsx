@@ -106,33 +106,39 @@ export default function AudioPlayer({ src, className }: { src: string | null; cl
 
   if (!src) return null;
   return (
-    <div className={clsx(`px-2 flex flex-col gap-1 bg-windows-gray-300 `, className)}>
-      <div className="w-full h-full"></div>
-      <div className="w-full py-2">
-        <input
+    <>
+      <audio ref={audio} src={src} className="hidden"></audio>
+      <div className={clsx(`p-1  flex flex-col gap-1 bg-windows-gray-300 `, className)}>
+        <div className="h-96 bg-black border-2  border-[#808080]  ">screen</div>
+        {/* <input
           type="range"
-          className="w-full"
+          className="w-full py-2"
           min={0}
           max={duration}
           value={currentTime}
           onChange={handleTimeUpdate}
           ref={progressBar}
-        />
+        /> */}
+        <div className="flex flex-wrap gap-2 ">
+          <div className="flex">
+            <ButtonControl icon={play} onClick={handlePlay} />
+            <ButtonControl icon={pause} onClick={handlePause} />
+            <ButtonControl icon={stop} onClick={handleStop} />
+            <Divider />
+          </div>
+          <div className="flex">
+            <ButtonControl icon={prev} />
+            <ButtonControl icon={rewind} />
+            <ButtonControl icon={forward} />
+            <ButtonControl icon={next} />
+            <Divider />
+          </div>
+          <div className="flex">
+            <ButtonControl icon={isMuted || volume === 0 ? loudspeakermuted : loudspeaker} onClick={toggleMute} />
+            <input type="range" value={volume} min={0} max={1} step={0.1} onChange={handleVolumeChange} />
+          </div>
+        </div>
       </div>
-      <div className="flex gap-2">
-        <audio ref={audio} src={src} className="hidden"></audio>
-        <ButtonControl icon={play} onClick={handlePlay} />
-        <ButtonControl icon={pause} onClick={handlePause} />
-        <ButtonControl icon={stop} onClick={handleStop} />
-        <Divider />
-        <ButtonControl icon={prev} />
-        <ButtonControl icon={rewind} />
-        <ButtonControl icon={forward} />
-        <ButtonControl icon={next} />
-        <Divider />
-        <ButtonControl icon={isMuted || volume === 0 ? loudspeakermuted : loudspeaker} onClick={toggleMute} />
-        <input type="range" value={volume} min={0} max={1} step={0.1} onChange={handleVolumeChange} />
-      </div>
-    </div>
+    </>
   );
 }
