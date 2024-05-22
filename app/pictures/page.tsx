@@ -11,6 +11,7 @@ import ImageViewer from "../UI/ImageViewer";
 import { ComponentPropsWithoutRef, useState } from "react";
 import ToolbarMenu from "../UI/ToolbarMenu";
 import clsx from "clsx";
+import Modal from "../UI/Modal";
 
 const pictures = [
   {
@@ -75,9 +76,11 @@ function Tile({
 export default function page() {
   const [selectedImage, setSelectedImage] = useState<{ name: string; src: StaticImageData } | null>(null);
   const [view, setView] = useState<"tiles" | "list">("list");
+  const [isOpen, setIsOpen] = useState(false);
 
   function handleClick(image: { name: string; src: StaticImageData }) {
     setSelectedImage(image);
+    setIsOpen(true);
   }
 
   function handleSelectView(value: string) {
@@ -129,11 +132,13 @@ export default function page() {
         <div className="w-1/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
       </Window.Footer>
       {selectedImage && (
-        <ImageViewer
+        <Modal
           title={`Preview of ${selectedImage.name}`}
           body={
             <Image src={selectedImage.src} alt={selectedImage.name} height={640} width={480} className="object-cover" />
           }
+          open={isOpen}
+          setIsOpen={setIsOpen}
         />
       )}
     </Window>

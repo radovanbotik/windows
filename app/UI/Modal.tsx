@@ -31,7 +31,7 @@ export default function Modal({
             </div>
           </Dialog.Title>
           <div className="p-1">
-            <Dialog.Description as="div">{description}</Dialog.Description>
+            {description && <Dialog.Description as="div">{description}</Dialog.Description>}
             {/* body */}
             {body}
           </div>
