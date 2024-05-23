@@ -18,16 +18,57 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  @keyframes animatecolor {
+    0% {
+      --color1: rgb(100, 200, 255);
+      --color2: rgb(0, 200, 255);
+      --color3: rgb(0, 200, 255);
+      --color4: rgb(100, 50, 255);
+    }
+    40% {
+      --color1: rgb(100, 200, 255);
+      --color2: rgb(5, 200, 255);
+      --color3: rgb(5, 200, 255);
+      --color4: rgb(100, 50, 150);
+    }
+    50% {
+      --color1: rgb(90, 200, 255);
+      --color2: rgb(10, 200, 255);
+      --color3: rgb(10, 200, 255);
+      --color4: rgb(110, 50, 100);
+    }
+    60% {
+      --color1: rgb(40, 200, 255);
+      --color2: rgb(30, 200, 10);
+      --color3: rgb(40, 70, 255);
+      --color4: rgb(110, 50, 150);
+    }
+    100% {
+      --color1: rgb(40, 200, 255);
+      --color2: rgb(60, 200, 10);
+      --color3: rgb(80, 70, 255);
+      --color4: rgb(110, 50, 100);
+    }
+  }
+
+  .gradient-animation {
+    --color1: black;
+    --color2: black;
+    --color3: black;
+    --color4: black;
+    background-image: linear-gradient(45deg, var(--color1), var(--color2)),
+      radial-gradient(closest-side, var(--color3), var(--color4));
+    background-size: auto, 3px 3px;
+    background-blend-mode: multiply;
+    filter: contrast(5);
+    animation: animatecolor 1.2s infinite ease-in-out 0.5s;
   }
 }

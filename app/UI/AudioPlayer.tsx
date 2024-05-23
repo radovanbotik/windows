@@ -41,6 +41,8 @@ export default function AudioPlayer({ src, className }: { src: string | null; cl
   const progressBar = useRef<HTMLInputElement>(null);
   const requestAni = useRef<number | null>(null);
 
+  const screen = useRef(null);
+
   function handlePlay() {
     if (audio.current) {
       console.log(src);
@@ -61,6 +63,7 @@ export default function AudioPlayer({ src, className }: { src: string | null; cl
     if (audio.current) {
       audio.current.pause();
       audio.current.currentTime = 0;
+      setIsPlaying(false);
     }
   }
 
@@ -109,7 +112,9 @@ export default function AudioPlayer({ src, className }: { src: string | null; cl
     <>
       <audio ref={audio} src={src} className="hidden"></audio>
       <div className={clsx(`p-1  flex flex-col gap-1 bg-windows-gray-300 `, className)}>
-        <div className="h-96 bg-black border-2  border-[#808080]  ">screen</div>
+        <div className="h-96 border-2 bg-black border-[#808080]  ">
+          {isPlaying && <div className="w-full h-full gradient-animation"></div>}
+        </div>
         {/* <input
           type="range"
           className="w-full py-2"
