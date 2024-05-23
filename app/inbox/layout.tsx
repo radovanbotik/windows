@@ -59,11 +59,10 @@ const outlook = [
     name: "Outlooks express",
     icon: outlookexpress,
     actions: [
-      { name: "Inbox", href: "/inbox/inbox", icon: write },
+      { name: "Inbox", href: "/inbox", icon: write },
       { name: "Sent Items", href: "/inbox/sent-items", icon: directorycabinet },
       { name: "Deleted Items", href: "/inbox/deleted-items", icon: recyclebinempty },
       { name: "Contacts", href: "/inbox/contacts", icon: address },
-      // { name: "Draft Items", href: "/draft-items", icon: "" },
     ],
   },
   { name: "New search", icon: outlooktack, actions: [] },
@@ -134,30 +133,30 @@ function Quicklinks() {
 
 function Body({ children }: { children: ReactNode }) {
   return (
-    <div className="grid grid-cols-2 gap-2 bg-windows-gray">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-windows-gray">
       <div className="bg-windows-white px-1 py-4 sm:p-4">
         <Tree />
       </div>
-      <div className="flex flex-col ">
-        <div className="flex w-full border-2 border-gray-600 flex-wrap">
-          <Button variant="windows">!</Button>
-          <Button variant="windows">
+      <div className="flex flex-col">
+        <div className="grid grid-cols-[32px_32px_32px_1fr_1fr_1fr] w-full border-2 border-gray-600">
+          <Button variant="windows" className="inline-grid w-full">
+            !
+          </Button>
+          <Button variant="windows" className="inline-grid  w-full">
             <Image src={envelopeclosed} alt="unopened" />
           </Button>
-          <Button variant="windows">
+          <Button variant="windows" className="inline-grid  w-full">
             <Image src={template} alt="attachment" />
           </Button>
-          <div className="flex flex-auto">
-            <Button variant="system" className="w-full">
-              From
-            </Button>
-            <Button variant="system" className="w-full">
-              Subject
-            </Button>
-            <Button variant="system" className="w-full">
-              Received
-            </Button>
-          </div>
+          <Button variant="system" className="inline-grid  w-full">
+            From
+          </Button>
+          <Button variant="system" className="inline-grid  w-full">
+            Subject
+          </Button>
+          <Button variant="system" className="inline-grid  w-full">
+            Date
+          </Button>
         </div>
         <div className="bg-windows-white flex-auto overscroll-y">{children}</div>
       </div>

@@ -26,7 +26,7 @@ export function Window<T extends ElementType = "div">({
 
 Window.Header = function WindowHeader({ children, className }: ComponentPropsWithoutRef<"div">) {
   return (
-    <div className={clsx(className, "bg-windows-blue text-windows-white px-2")}>
+    <div className={clsx(className, "bg-windows-blue text-windows-white px-2 ")}>
       <div className="flex items-center">
         <span className="mr-auto">{children}</span>
         <Button variant="windows" className="w-4 h-4">
