@@ -1,7 +1,7 @@
 "use client";
 import { Window } from "../UI/Window";
 import document16 from "../../public/icons/document16.png";
-import floppy16 from "../../public/icons/floppy16.png";
+import fileset16 from "../../public/icons/floppy16.png";
 import print16 from "../../public/icons/print16.png";
 import download16 from "../../public/icons/download16.png";
 import me from "../../public/images/me.jpg";
@@ -23,32 +23,32 @@ const actions = [
         name: "New Document",
         href: "#",
       },
-      {
-        name: "Save Document",
-        href: "#",
-      },
+      // {
+      //   name: "Save Document",
+      //   href: "#",
+      // },
       {
         name: "Download Document",
         href: "#",
       },
     ],
   },
-  {
-    name: "Edit",
-    href: "#",
-    actions: [
-      {
-        name: "Download",
-        href: "#",
-      },
-    ],
-  },
+  // {
+  //   name: "Edit",
+  //   href: "#",
+  //   actions: [
+  //     {
+  //       name: "Download",
+  //       href: "#",
+  //     },
+  //   ],
+  // },
   {
     name: "View",
     href: "#",
     actions: [
       {
-        name: "Display as book",
+        name: "View before print",
         href: "#",
       },
     ],
@@ -81,15 +81,17 @@ const shortcuts = [
     icon: document16,
     tooltip: "Create a new file",
   },
-  {
-    name: "Save File",
-    icon: floppy16,
-    tooltip: "Save File",
-  },
+  // {
+  //   name: "Save File",
+  //   icon: floppy16,
+  //   tooltip: "Save File",
+  // },
   {
     name: "Download File",
     icon: download16,
     tooltip: "Download File",
+    href: "/radovan_botik_en.pdf",
+    download: true,
   },
   {
     name: "Print File",
@@ -97,11 +99,6 @@ const shortcuts = [
     tooltip: "Print File",
     onClick: () => window.print(),
   },
-  // {
-  //   name: "Display Before Print",
-  //   icon: fileset16,
-  //   tooltip: "Display Before Printing",
-  // },
 ];
 
 function Navbar() {
@@ -126,6 +123,8 @@ function Toolbar() {
           onClick={shortcut.onClick}
           variant="windows"
           className="h-8 w-8"
+          href={shortcut.href ?? undefined}
+          download={shortcut.download}
         >
           <Image src={shortcut.icon} alt={shortcut.name} width={16} height={16} />
         </Button>

@@ -6,6 +6,7 @@ import Image from "next/image";
 import play from "../../public/icons/player/play50.png";
 import clsx from "clsx";
 import Modal from "../UI/Modal";
+import loader from "../../public/gifs/loader.gif";
 
 type SpotifyPlaylist = {
   id: string;
@@ -29,7 +30,13 @@ export default function Page() {
   }, []);
 
   console.log(tracks);
-  if (!tracks) return <p>loading...</p>;
+  if (!tracks)
+    return (
+      <div className="grid place-content-center w-full h-full">
+        <Image src={loader} alt="a" />
+        <p className="text-center">LOADING</p>
+      </div>
+    );
 
   return (
     <div className="flex flex-wrap justify-between w-full h-full">
