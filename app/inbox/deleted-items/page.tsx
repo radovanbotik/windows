@@ -6,17 +6,7 @@ import envelopeopen from "../../../public/icons/envelopeopen16.png";
 import template from "../../../public/icons/template16.png";
 import Modal from "../../UI/Modal";
 import { useState } from "react";
-
-type Email = {
-  id: number;
-  from: string;
-  subject: string;
-  date: string;
-  body: string;
-  important: boolean;
-  opened: boolean;
-  attachment: boolean;
-};
+import { deletedEmails,type Email } from "@/app/lib/inboxdata";
 
 function Email({
   id,
@@ -58,23 +48,12 @@ function Email({
 }
 
 export default function Page() {
-  const emails: Email[] = [
-    {
-      id: 1,
-      from: "alza.sk",
-      subject: "Special Offer Just for You!",
-      date: "05/23/2024",
-      body: "Enjoy exclusive discounts on electronics at Alza.sk. Shop now and save big! Best, Alza.sk Team",
-      important: false,
-      opened: false,
-      attachment: false,
-    },
-  ];
+  
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
 
   function selectEmail(id: number) {
-    const email = emails.find(email => email.id === id);
+    const email = deletedEmails.find(email => email.id === id);
     if (email) {
       setSelectedEmail(email);
       setIsOpen(true);
@@ -85,7 +64,7 @@ export default function Page() {
   return (
     <>
       <ul className="flex flex-col  space-y-1">
-        {emails.map(email => (
+        {deletedEmails.map(email => (
           <Email key={email.id} {...email} selectEmail={selectEmail} />
         ))}
       </ul>

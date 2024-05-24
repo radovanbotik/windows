@@ -6,17 +6,7 @@ import envelopeopen from "../../public/icons/envelopeopen16.png";
 import template from "../../public/icons/template16.png";
 import Modal from "../UI/Modal";
 import { useState } from "react";
-
-type Email = {
-  id: number;
-  from: string;
-  subject: string;
-  date: string;
-  body: string;
-  important: boolean;
-  opened: boolean;
-  attachment: boolean;
-};
+import { receivedEmails, type Email } from "../lib/inboxdata";
 
 function Email({
   id,
@@ -58,43 +48,11 @@ function Email({
 }
 
 export default function Page() {
-  const emails: Email[] = [
-    {
-      id: 1,
-      from: "joebiden@gmail.com",
-      subject: "Confidential: Immediate Attention Required",
-      date: "05/23/2024",
-      body: "Team,We're embarking on a critical and confidential mission. Details are top secret, but your expertise is crucial for success. Maintain utmost discretion. Await further instructions.",
-      important: true,
-      opened: false,
-      attachment: true,
-    },
-    {
-      id: 2,
-      from: "popefrancis@yahoo.com",
-      subject: "blessings from vatican",
-      date: "05/20/2024",
-      body: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere neque corporis mollitia veniam maiores eligendi sint sed commodi nemo laudantium, accusamus dolore perspiciatis esse provident ex dicta ipsam, enim molestiae optio error saepe illo. Dolores deserunt et neque assumenda dicta id quam enim magnam doloribus ratione doloremque, aut dolor eum?",
-      important: false,
-      opened: false,
-      attachment: false,
-    },
-    {
-      id: 3,
-      from: "nelli@gmail.com",
-      subject: "greece info",
-      date: "01/15/2024",
-      body: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere neque corporis mollitia veniam maiores eligendi sint sed commodi nemo laudantium, accusamus dolore perspiciatis esse provident ex dicta ipsam, enim molestiae optio error saepe illo. Dolores deserunt et neque assumenda dicta id quam enim magnam doloribus ratione doloremque, aut dolor eum?",
-      important: false,
-      opened: false,
-      attachment: false,
-    },
-  ];
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
 
   function selectEmail(id: number) {
-    const email = emails.find(email => email.id === id);
+    const email = receivedEmails.find(email => email.id === id);
     if (email) {
       setSelectedEmail(email);
       setIsOpen(true);
@@ -105,7 +63,7 @@ export default function Page() {
   return (
     <>
       <ul className="flex flex-col  space-y-1">
-        {emails.map(email => (
+        {receivedEmails.map(email => (
           <Email key={email.id} {...email} selectEmail={selectEmail} />
         ))}
       </ul>
