@@ -26,7 +26,7 @@ export default function Button({ variant, children, className, tooltip, ...props
         {children}
         {tooltip && (
           <span className="absolute -top-10 text-nowrap left-0 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover/button:scale-100 z-50">
-            ✨ {tooltip}
+            {tooltip}
           </span>
         )}
       </button>
