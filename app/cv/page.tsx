@@ -142,25 +142,26 @@ function Toolbar() {
 
 function TextPreferences({
   font,
-  size,
   fonts,
-  sizes,
+  // sizes,
   handleChangeFont,
-  handleChangeSize,
-}: {
+}: // handleChangeSize,
+{
   font: Font;
   fonts: Font[];
-  size: Size;
-  sizes: Size[];
+  // size: Size;
+  // sizes: Size[];
   handleChangeFont: (e: ChangeEvent<HTMLSelectElement>) => void;
-  handleChangeSize: (e: ChangeEvent<HTMLSelectElement>) => void;
+  // handleChangeSize: (e: ChangeEvent<HTMLSelectElement>) => void;
 }) {
   const context = useDocContext();
+  console.log(context);
+  const sizes = [12, 14, 16, 18, 20];
   return (
     <div className="flex flex-wrap p-1 gap-2 items-center ">
       <div className="flex gap-2 flex-wrap ">
-        <Select options={fonts} value={font.value} onChange={handleChangeFont} />
-        <Select options={sizes} value={size.value} onChange={handleChangeSize} />
+        {/* <Select options={fonts} value={font.value} onChange={handleChangeFont} /> */}
+        <Select options={sizes} value={context.size} onChange={context?.changeSize} />
       </div>
       <div className="flex ">
         <Button
@@ -192,8 +193,31 @@ function TextPreferences({
   );
 }
 
-function Document({ font, size }: { font: Font; size: Size }) {
-  const { bold, italics, underlined } = useDocContext();
+function Document({ font }: { font: Font }) {
+  const { bold, italics, underlined, size } = useDocContext();
+  const sizeLookup = [
+    {
+      size: 12,
+      value: "text-xs",
+    },
+    {
+      size: 14,
+      value: "text-sm",
+    },
+    {
+      size: 16,
+      value: "text-base",
+    },
+    {
+      size: 18,
+      value: "text-lg",
+    },
+    {
+      size: 20,
+      value: "text-xl",
+    },
+  ];
+
   return (
     <div className={clsx("sm:flex gap-4  overflow-y-auto")}>
       <div className="sm:w-1/3  flex flex-col">
@@ -222,7 +246,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
                     <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>About</dt>
                     <dd
                       className={clsx(
-                        size && size.value,
+                        sizeLookup.find(object => object.size === size).value,
                         bold && "font-black",
                         italics && "italic",
                         underlined && "underline",
@@ -236,33 +260,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
                       </p>
                     </dd>
                   </div>
-                  {/* Contact */}
-                  {/* <div className="mt-5 space-y-1">
-                    <p className="text-sm text-gray-500">
-                      LinkedIn:{" "}
-                      <a href="https://www.linkedin.com/in/radovan-botik/">
-                        https://www.linkedin.com/in/radovan-botik/
-                      </a>{" "}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Telephone <a href="tel:+421910931580">+421910931580</a>
-                    </p>
-                  </div> */}
-                  {/* CTA */}
-                  {/* <div className="mt-5 flex flex-wrap space-y-3 sm:space-x-3 sm:space-y-0">
-                    <a
-                      href="mailto:radovanbotik@gmail.com"
-                      className="inline-flex w-full flex-shrink-0 items-center justify-center  bg-windows-blue px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:flex-1"
-                    >
-                      Message
-                    </a>
-                    <a
-                      href="tel:+421910931580"
-                      className="inline-flex w-full flex-1 items-center justify-center  bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                      Call
-                    </a>
-                  </div> */}
+
                   {/* achievements */}
                   <div className="mt-6">
                     <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>
@@ -270,7 +268,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
                     </dt>
                     <dd
                       className={clsx(
-                        size && size.value,
+                        sizeLookup.find(object => object.size === size).value,
                         bold && "font-black",
                         italics && "italic",
                         underlined && "underline",
@@ -297,7 +295,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
                 <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Frontend </dt>
                 <dd
                   className={clsx(
-                    size && size.value,
+                    sizeLookup.find(object => object.size === size).value,
                     bold && "font-black",
                     italics && "italic",
                     underlined && "underline",
@@ -309,7 +307,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
                 </dd>
                 <dd
                   className={clsx(
-                    size && size.value,
+                    sizeLookup.find(object => object.size === size).value,
                     bold && "font-black",
                     italics && "italic",
                     underlined && "underline",
@@ -321,7 +319,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
                 </dd>
                 <dd
                   className={clsx(
-                    size && size.value,
+                    sizeLookup.find(object => object.size === size).value,
                     bold && "font-black",
                     italics && "italic",
                     underlined && "underline",
@@ -337,7 +335,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
                 <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Backend </dt>
                 <dd
                   className={clsx(
-                    size && size.value,
+                    sizeLookup.find(object => object.size === size).value,
                     bold && "font-black",
                     italics && "italic",
                     underlined && "underline",
@@ -349,7 +347,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
                 </dd>
                 <dd
                   className={clsx(
-                    size && size.value,
+                    sizeLookup.find(object => object.size === size).value,
                     bold && "font-black",
                     italics && "italic",
                     underlined && "underline",
@@ -365,7 +363,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
                 <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Other skills </dt>
                 <dd
                   className={clsx(
-                    size && size.value,
+                    sizeLookup.find(object => object.size === size).value,
                     bold && "font-black",
                     italics && "italic",
                     underlined && "underline",
@@ -377,7 +375,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
                 </dd>
                 <dd
                   className={clsx(
-                    size && size.value,
+                    sizeLookup.find(object => object.size === size).value,
                     bold && "font-black",
                     italics && "italic",
                     underlined && "underline",
@@ -394,7 +392,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
               <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Languages</dt>
               <dd
                 className={clsx(
-                  size && size.value,
+                  sizeLookup.find(object => object.size === size).value,
                   bold && "font-black",
                   italics && "italic",
                   underlined && "underline",
@@ -406,7 +404,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
               </dd>
               <dd
                 className={clsx(
-                  size && size.value,
+                  sizeLookup.find(object => object.size === size).value,
                   bold && "font-black",
                   italics && "italic",
                   underlined && "underline",
@@ -422,7 +420,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
               <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Courses</dt>
               <dd
                 className={clsx(
-                  size && size.value,
+                  sizeLookup.find(object => object.size === size).value,
                   bold && "font-black",
                   italics && "italic",
                   underlined && "underline",
@@ -460,7 +458,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
               <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Experience</dt>
               <dd
                 className={clsx(
-                  size && size.value,
+                  sizeLookup.find(object => object.size === size).value,
                   bold && "font-black",
                   italics && "italic",
                   underlined && "underline",
@@ -472,7 +470,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
               </dd>
               <dd
                 className={clsx(
-                  size && size.value,
+                  sizeLookup.find(object => object.size === size).value,
                   bold && "font-black",
                   italics && "italic",
                   underlined && "underline",
@@ -485,7 +483,7 @@ function Document({ font, size }: { font: Font; size: Size }) {
 
               <ul
                 className={clsx(
-                  size && size.value,
+                  sizeLookup.find(object => object.size === size).value,
                   bold && "font-black",
                   italics && "italic",
                   underlined && "underline",
@@ -553,11 +551,6 @@ export default function page() {
     if (font) setFont(font);
     return;
   }
-  function handleChangeSize(e: ChangeEvent<HTMLSelectElement>) {
-    const size = sizes.find(option => option.value === e.target.value);
-    if (size) setSize(size);
-    return;
-  }
 
   return (
     <Window className="w-full h-[calc(100vh-34px)]">
@@ -565,20 +558,13 @@ export default function page() {
       <Window.Toolbar>
         <Navbar />
         <Toolbar />
-        <TextPreferences
-          size={size}
-          font={font}
-          fonts={fonts}
-          sizes={sizes}
-          handleChangeFont={handleChangeFont}
-          handleChangeSize={handleChangeSize}
-        />
+        <TextPreferences font={font} fonts={fonts} handleChangeFont={handleChangeFont} />
       </Window.Toolbar>
       <Window.Body
         variant="window"
         className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]  overflow-hidden"
       >
-        <Document font={font} size={size} />
+        <Document font={font} />
       </Window.Body>
       <Window.Footer className="flex gap-1">
         <div className="w-2/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
