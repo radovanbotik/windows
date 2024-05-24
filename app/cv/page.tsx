@@ -175,8 +175,8 @@ function TextPreferences() {
 
 function Cell({ title, body }: ComponentPropsWithoutRef<"div"> & { title: string; body: ReactNode }) {
   const { bold, italics, underlined, size, font } = useDocContext();
-  const fontSize = sizeLookup.find(object => object.size === size).value;
-  const fontFamily = fontLookup.find(object => object.font === font).value.className;
+  const fontSize = sizeLookup.filter(object => object.size === Number(size))[0].value;
+  const fontFamily = fontLookup.filter(object => object.font === font)[0].value.className;
   const isBold = bold && "font-black";
   const isItalic = italics && "italic";
   const isUnderline = underlined && "underline";

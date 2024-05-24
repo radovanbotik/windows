@@ -27,7 +27,7 @@ export const sizeLookup = [
     value: "text-xl",
   },
 ];
-export const sizes = [12, 14, 16, 18, 20];
+export const sizes = [12, 14, 16, 18, 20] as const;
 
 export const fontLookup = [
   {
@@ -43,4 +43,4 @@ export const fontLookup = [
     value: firaSans,
   },
 ];
-export const fonts = ["MS Sans Serif", "Roboto", "Fira Sans"];
+export const fonts = ["MS Sans Serif", "Roboto", "Fira Sans"] as const;
