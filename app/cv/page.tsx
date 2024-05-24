@@ -15,6 +15,7 @@ import clsx from "clsx";
 import Select from "../UI/Select";
 import { Font, Size } from "../lib/types";
 import ToolbarMenu from "../UI/ToolbarMenu";
+import { useDocContext } from "./context";
 
 const actions = [
   {
@@ -591,6 +592,9 @@ export default function page() {
   function toggleUnderline() {
     setUnderlined(prev => !prev);
   }
+
+  const greeting = useDocContext();
+  console.log(greeting);
 
   return (
     <Window className="w-full h-[calc(100vh-34px)]">

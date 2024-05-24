@@ -29,7 +29,7 @@ function Email({
   selectEmail,
 }: Email & { selectEmail: (id: number) => void }) {
   return (
-    <li onClick={() => selectEmail(id)}>
+    <li onClick={() => selectEmail(id)} className="cursor-pointer">
       <div className="grid grid-cols-[32px_32px_32px_1fr_1fr_1fr] border-b border-windows-gray-200">
         <div className="inline-grid place-content-center w-full">{important && "!"}</div>
         <div className="inline-grid place-content-center w-full ">
@@ -62,9 +62,9 @@ export default function Page() {
     {
       id: 1,
       from: "joebiden@gmail.com",
-      subject: "mission",
+      subject: "Confidential: Immediate Attention Required",
       date: "05/23/2024",
-      body: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere neque corporis mollitia veniam maiores eligendi sint sed commodi nemo laudantium, accusamus dolore perspiciatis esse provident ex dicta ipsam, enim molestiae optio error saepe illo. Dolores deserunt et neque assumenda dicta id quam enim magnam doloribus ratione doloremque, aut dolor eum?",
+      body: "Team,We're embarking on a critical and confidential mission. Details are top secret, but your expertise is crucial for success. Maintain utmost discretion. Await further instructions.",
       important: true,
       opened: false,
       attachment: true,

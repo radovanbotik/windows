@@ -24,9 +24,6 @@ export default function Button({ variant, children, className, tooltip, ...props
     <div className="group/button relative">
       <button className={styles} {...props}>
         {children}
-        {/* <div className="hidden group-hover:block absolute z-50 whitespace-normal break-words rounded-lg bg-black py-1.5 px-3 font-sans text-sm font-normal text-white focus:outline-none">
-        this is tooltip
-      </div> */}
         {tooltip && (
           <span className="absolute -top-10 text-nowrap left-0 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover/button:scale-100 z-50">
             ✨ {tooltip}

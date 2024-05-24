@@ -34,10 +34,10 @@ export default function Page() {
     },
   ];
   return (
-    <div>
+    <>
       {icons.map((icon, index) => {
         return <Icon key={icon.name} {...icon} />;
       })}
-    </div>
+    </>
   );
 }

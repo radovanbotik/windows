@@ -32,10 +32,10 @@ export default function Page() {
     },
   ];
   return (
-    <div>
+    <>
       {actions.map(action => (
         <Icon key={action.name} {...action} />
       ))}
-    </div>
+    </>
   );
 }

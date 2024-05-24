@@ -5,9 +5,9 @@ import { Window } from "../UI/Window";
 export default function layout({ children }: { children: ReactNode }) {
   return (
     <Window className="w-full h-[calc(100vh-34px)]">
-      <Window.Header>My Computer</Window.Header>
+      <Window.Header>Media Player</Window.Header>
       <Window.Toolbar>
-        toolbar
+        {/* toolbar */}
         {/* <ToolbarMenu actions={actions}>View</ToolbarMenu>
         <div className="px-2 bg-windows-white">{pathname}</div> */}
       </Window.Toolbar>
