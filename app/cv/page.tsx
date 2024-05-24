@@ -141,18 +141,12 @@ function Toolbar() {
 }
 
 function TextPreferences({
-  toggleBold,
-  toggleItalic,
-  toggleUnderline,
   font,
   size,
   fonts,
   sizes,
   handleChangeFont,
   handleChangeSize,
-  bold,
-  italics,
-  underlined,
 }: {
   font: Font;
   fonts: Font[];
@@ -160,13 +154,8 @@ function TextPreferences({
   sizes: Size[];
   handleChangeFont: (e: ChangeEvent<HTMLSelectElement>) => void;
   handleChangeSize: (e: ChangeEvent<HTMLSelectElement>) => void;
-  toggleBold: () => void;
-  toggleItalic: () => void;
-  toggleUnderline: () => void;
-  bold: boolean;
-  italics: boolean;
-  underlined: boolean;
 }) {
+  const context = useDocContext();
   return (
     <div className="flex flex-wrap p-1 gap-2 items-center ">
       <div className="flex gap-2 flex-wrap ">
@@ -177,24 +166,24 @@ function TextPreferences({
         <Button
           variant="windows"
           className="font-black h-8 w-8"
-          tooltip={bold ? "remove Bold" : "set to Bold"}
-          onClick={toggleBold}
+          tooltip={context.bold ? "remove Bold" : "set to Bold"}
+          onClick={context.toggleBold}
         >
           B
         </Button>
         <Button
           variant="windows"
           className="font-black h-8 w-8"
-          tooltip={italics ? "remove Italic" : "set to Italic"}
-          onClick={toggleItalic}
+          tooltip={context.italics ? "remove Italic" : "set to Italic"}
+          onClick={context.toggleItalic}
         >
           <span className="italic ">I</span>
         </Button>
         <Button
           variant="windows"
           className=" font-black underline h-8 w-8"
-          tooltip={underlined ? "remove Underlined" : "set to Underlined"}
-          onClick={toggleUnderline}
+          tooltip={context.underlined ? "remove Underlined" : "set to Underlined"}
+          onClick={context.toggleUnderline}
         >
           U
         </Button>
@@ -203,19 +192,8 @@ function TextPreferences({
   );
 }
 
-function Document({
-  font,
-  size,
-  bold,
-  italics,
-  underlined,
-}: {
-  bold: boolean;
-  italics: boolean;
-  underlined: boolean;
-  font: Font;
-  size: Size;
-}) {
+function Document({ font, size }: { font: Font; size: Size }) {
+  const { bold, italics, underlined } = useDocContext();
   return (
     <div className={clsx("sm:flex gap-4  overflow-y-auto")}>
       <div className="sm:w-1/3  flex flex-col">
@@ -567,9 +545,6 @@ const sizes: Size[] = [
   },
 ];
 export default function page() {
-  const [bold, setBold] = useState(false);
-  const [italics, setItalics] = useState(false);
-  const [underlined, setUnderlined] = useState(false);
   const [font, setFont] = useState<Font>(fonts[0]);
   const [size, setSize] = useState<Size>(sizes[1]);
 
@@ -583,18 +558,6 @@ export default function page() {
     if (size) setSize(size);
     return;
   }
-  function toggleBold() {
-    setBold(prev => !prev);
-  }
-  function toggleItalic() {
-    setItalics(prev => !prev);
-  }
-  function toggleUnderline() {
-    setUnderlined(prev => !prev);
-  }
-
-  const greeting = useDocContext();
-  console.log(greeting);
 
   return (
     <Window className="w-full h-[calc(100vh-34px)]">
@@ -609,19 +572,13 @@ export default function page() {
           sizes={sizes}
           handleChangeFont={handleChangeFont}
           handleChangeSize={handleChangeSize}
-          bold={bold}
-          italics={italics}
-          underlined={underlined}
-          toggleBold={toggleBold}
-          toggleItalic={toggleItalic}
-          toggleUnderline={toggleUnderline}
         />
       </Window.Toolbar>
       <Window.Body
         variant="window"
         className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]  overflow-hidden"
       >
-        <Document font={font} size={size} bold={bold} italics={italics} underlined={underlined} />
+        <Document font={font} size={size} />
       </Window.Body>
       <Window.Footer className="flex gap-1">
         <div className="w-2/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>

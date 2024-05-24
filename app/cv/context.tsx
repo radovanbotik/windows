@@ -11,8 +11,14 @@ const initialState = {
 };
 
 function reducer(state, action) {
-  if (action.type === "something") {
-    return { ...state, value: 1 };
+  if (action.type === "toggle_bold") {
+    return { ...state, bold: !state.bold };
+  }
+  if (action.type === "toggle_italic") {
+    return { ...state, bold: !state.bold };
+  }
+  if (action.type === "toggle_underline") {
+    return { ...state, bold: !state.bold };
   }
   return state;
 }
@@ -20,7 +26,21 @@ function reducer(state, action) {
 export function Context({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  return <WordContext.Provider value={{ greeting: "hi" }}>{children}</WordContext.Provider>;
+  function toggleBold() {
+    dispatch({ type: "toggle_bold" });
+  }
+  function toggleItalic() {
+    dispatch({ type: "toggle_italic" });
+  }
+  function toggleUnderline() {
+    dispatch({ type: "toggle_underline" });
+  }
+
+  return (
+    <WordContext.Provider value={{ ...state, toggleBold, toggleItalic, toggleUnderline }}>
+      {children}
+    </WordContext.Provider>
+  );
 }
 
 export function useDocContext() {
