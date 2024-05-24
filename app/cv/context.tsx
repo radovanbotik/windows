@@ -6,12 +6,13 @@ const WordContext = createContext<
       toggleItalic: () => void;
       toggleUnderline: () => void;
       changeSize: (size: number) => void;
+      changeFont: (font: string) => void;
     })
   | null
 >(null);
 
 const initialState = {
-  font: "ms-sans-serif",
+  font: "MS Sans Serif",
   size: 14,
   bold: false,
   italics: false,
@@ -30,7 +31,10 @@ function reducer(state, action) {
     return { ...state, bold: !state.bold };
   }
   if (action.type === "set_size") {
-    return { ...state, size: action.payload };
+    return { ...state, size: Number(action.payload) };
+  }
+  if (action.type === "set_font") {
+    return { ...state, font: action.payload };
   }
   return state;
 }
@@ -50,9 +54,12 @@ export function Context({ children }: { children: ReactNode }) {
   function changeSize(size: number) {
     dispatch({ type: "set_size", payload: size });
   }
+  function changeFont(font: string) {
+    dispatch({ type: "set_font", payload: font });
+  }
 
   return (
-    <WordContext.Provider value={{ ...state, toggleBold, toggleItalic, toggleUnderline, changeSize }}>
+    <WordContext.Provider value={{ ...state, toggleBold, toggleItalic, toggleUnderline, changeSize, changeFont }}>
       {children}
     </WordContext.Provider>
   );

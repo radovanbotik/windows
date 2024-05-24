@@ -7,15 +7,13 @@ import download16 from "../../public/icons/download16.png";
 import me from "../../public/images/me.jpg";
 import Button from "../UI/Button";
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
-import { Roboto, Fira_Sans } from "next/font/google";
-import localFont from "next/font/local";
 
 import clsx from "clsx";
 import Select from "../UI/Select";
-import { Font, Size } from "../lib/types";
 import ToolbarMenu from "../UI/ToolbarMenu";
 import { useDocContext } from "./context";
+import { fontLookup, sizeLookup, sizes, fonts } from "../lib/worddata";
+import { ComponentPropsWithoutRef, ReactNode } from "react";
 
 const actions = [
   {
@@ -106,10 +104,6 @@ const shortcuts = [
   // },
 ];
 
-const msSansSerif = localFont({ src: "../../public/fonts/MS_Sans_Serif.ttf" });
-const roboto = Roboto({ weight: ["400", "700", "900"], subsets: ["latin"], style: ["normal", "italic"] });
-const firaSans = Fira_Sans({ weight: ["400", "700", "800", "900"], subsets: ["latin"], style: ["normal", "italic"] });
-
 function Navbar() {
   return (
     <div className="flex gap-4 p-1 border-b-2 border-b-stone-500">
@@ -140,27 +134,13 @@ function Toolbar() {
   );
 }
 
-function TextPreferences({
-  font,
-  fonts,
-  // sizes,
-  handleChangeFont,
-}: // handleChangeSize,
-{
-  font: Font;
-  fonts: Font[];
-  // size: Size;
-  // sizes: Size[];
-  handleChangeFont: (e: ChangeEvent<HTMLSelectElement>) => void;
-  // handleChangeSize: (e: ChangeEvent<HTMLSelectElement>) => void;
-}) {
+function TextPreferences() {
   const context = useDocContext();
-  console.log(context);
-  const sizes = [12, 14, 16, 18, 20];
+
   return (
     <div className="flex flex-wrap p-1 gap-2 items-center ">
       <div className="flex gap-2 flex-wrap ">
-        {/* <Select options={fonts} value={font.value} onChange={handleChangeFont} /> */}
+        <Select options={fonts} value={context.font} onChange={context?.changeFont} />
         <Select options={sizes} value={context.size} onChange={context?.changeSize} />
       </div>
       <div className="flex ">
@@ -193,31 +173,24 @@ function TextPreferences({
   );
 }
 
-function Document({ font }: { font: Font }) {
-  const { bold, italics, underlined, size } = useDocContext();
-  const sizeLookup = [
-    {
-      size: 12,
-      value: "text-xs",
-    },
-    {
-      size: 14,
-      value: "text-sm",
-    },
-    {
-      size: 16,
-      value: "text-base",
-    },
-    {
-      size: 18,
-      value: "text-lg",
-    },
-    {
-      size: 20,
-      value: "text-xl",
-    },
-  ];
+function Cell({ title, body }: ComponentPropsWithoutRef<"div"> & { title: string; body: ReactNode }) {
+  const { bold, italics, underlined, size, font } = useDocContext();
+  const fontSize = sizeLookup.find(object => object.size === size).value;
+  const fontFamily = fontLookup.find(object => object.font === font).value.className;
+  const isBold = bold && "font-black";
+  const isItalic = italics && "italic";
+  const isUnderline = underlined && "underline";
+  return (
+    <div className="mt-6">
+      <dt className={"text-sm font-medium text-gray-500  sm:flex-shrink-0"}>{title}</dt>
+      <dd className={clsx(isBold, isItalic, isUnderline, fontSize, fontFamily, "mt-1 text-gray-900 sm:col-span-2")}>
+        {body}
+      </dd>
+    </div>
+  );
+}
 
+function Document() {
   return (
     <div className={clsx("sm:flex gap-4  overflow-y-auto")}>
       <div className="sm:w-1/3  flex flex-col">
@@ -231,7 +204,6 @@ function Document({ font }: { font: Font }) {
               {/* info */}
               <div className="mt-6 px-4 sm:mt-8 sm:flex sm:items-end sm:px-6">
                 <div className="sm:flex-1">
-                  {/* email */}
                   <div>
                     <div className="flex items-center">
                       <h3 className="text-xl font-bold text-gray-900 sm:text-2xl">Radovan Botik</h3>
@@ -241,44 +213,14 @@ function Document({ font }: { font: Font }) {
                     </div>
                     <p className="text-sm text-gray-500">radovanbotik@gmail.com</p>
                   </div>
-                  {/* about */}
-                  <div className="mt-6">
-                    <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>About</dt>
-                    <dd
-                      className={clsx(
-                        sizeLookup.find(object => object.size === size).value,
-                        bold && "font-black",
-                        italics && "italic",
-                        underlined && "underline",
-                        font && font.font.className,
-                        "mt-1 text-gray-900 sm:col-span-2"
-                      )}
-                    >
-                      <p>
-                        Aspiring Frontend Developer with a solid foundation in JavaScript, React, and Next.js. Seeking
-                        opportunities to leverage my skills and passion for frontend development.
-                      </p>
-                    </dd>
-                  </div>
-
-                  {/* achievements */}
-                  <div className="mt-6">
-                    <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>
-                      Notable Achievements
-                    </dt>
-                    <dd
-                      className={clsx(
-                        sizeLookup.find(object => object.size === size).value,
-                        bold && "font-black",
-                        italics && "italic",
-                        underlined && "underline",
-                        font && font.font.className,
-                        "mt-1 text-gray-900 sm:col-span-2"
-                      )}
-                    >
-                      Awareded "Agent of the Month" thanks to excellent results at AT&T.
-                    </dd>
-                  </div>
+                  <Cell
+                    title="About"
+                    body="Aspiring Frontend Developer with a solid foundation in JavaScript, React, and Next.js. Seeking opportunities to leverage my skills and passion for frontend development."
+                  />
+                  <Cell
+                    title="Notable Achievements"
+                    body='Awareded "Agent of the Month" thanks to excellent results at AT&T.'
+                  />
                 </div>
               </div>
             </div>
@@ -288,283 +230,100 @@ function Document({ font }: { font: Font }) {
       <div className="sm:w-2/3">
         <div className="pb-5 pt-5 sm:px-0 sm:pt-0">
           <dl className="space-y-8 px-4 sm:space-y-6 sm:px-6">
-            {/* skills */}
             <div className="flex justify-between lg:justify-start gap-4 lg:gap-10 flex-wrap ">
-              {/* frontend */}
-              <div>
-                <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Frontend </dt>
-                <dd
-                  className={clsx(
-                    sizeLookup.find(object => object.size === size).value,
-                    bold && "font-black",
-                    italics && "italic",
-                    underlined && "underline",
-                    font && font.font.className,
-                    "mt-1 text-gray-900 sm:col-span-2"
-                  )}
-                >
-                  Javascript ES6+ & Typescript
-                </dd>
-                <dd
-                  className={clsx(
-                    sizeLookup.find(object => object.size === size).value,
-                    bold && "font-black",
-                    italics && "italic",
-                    underlined && "underline",
-                    font && font.font.className,
-                    "mt-1 text-gray-900 sm:col-span-2"
-                  )}
-                >
-                  React & Next.js
-                </dd>
-                <dd
-                  className={clsx(
-                    sizeLookup.find(object => object.size === size).value,
-                    bold && "font-black",
-                    italics && "italic",
-                    underlined && "underline",
-                    font && font.font.className,
-                    "mt-1 text-gray-900 sm:col-span-2"
-                  )}
-                >
-                  Tailwind / SASS / CSS3
-                </dd>
-              </div>
-              {/* backend */}
-              <div>
-                <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Backend </dt>
-                <dd
-                  className={clsx(
-                    sizeLookup.find(object => object.size === size).value,
-                    bold && "font-black",
-                    italics && "italic",
-                    underlined && "underline",
-                    font && font.font.className,
-                    "mt-1 text-gray-900 sm:col-span-2"
-                  )}
-                >
-                  Node, Express.js
-                </dd>
-                <dd
-                  className={clsx(
-                    sizeLookup.find(object => object.size === size).value,
-                    bold && "font-black",
-                    italics && "italic",
-                    underlined && "underline",
-                    font && font.font.className,
-                    "mt-1 text-gray-900 sm:col-span-2"
-                  )}
-                >
-                  Mongo.db, PostgresSQL
-                </dd>
-              </div>
-              {/* other skills */}
-              <div>
-                <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Other skills </dt>
-                <dd
-                  className={clsx(
-                    sizeLookup.find(object => object.size === size).value,
-                    bold && "font-black",
-                    italics && "italic",
-                    underlined && "underline",
-                    font && font.font.className,
-                    "mt-1 text-gray-900 sm:col-span-2"
-                  )}
-                >
-                  Adobe Photoshop
-                </dd>
-                <dd
-                  className={clsx(
-                    sizeLookup.find(object => object.size === size).value,
-                    bold && "font-black",
-                    italics && "italic",
-                    underlined && "underline",
-                    font && font.font.className,
-                    "mt-1 text-gray-900 sm:col-span-2"
-                  )}
-                >
-                  Git & Github
-                </dd>
-              </div>
+              <Cell
+                title="Frontend"
+                body={
+                  <>
+                    <p>Javascript ES6+ & Typescript</p>
+                    <p>React & Next.js</p>
+                    <p>Tailwind / SASS / CSS3</p>
+                  </>
+                }
+              />
+              <Cell
+                title="Backend"
+                body={
+                  <>
+                    <p>Node, Express.js</p>
+                    <p>Mongo.db, SQL, Firebase</p>
+                    <p>Tailwind / SASS / CSS3</p>
+                  </>
+                }
+              />
+              <Cell
+                title="Other Skills & Proficiencies"
+                body={
+                  <>
+                    <p>HTTP, REST, API</p>
+                    <p>Git & Github</p>
+                    <p>Adobe Photoshop</p>
+                  </>
+                }
+              />
             </div>
-            {/* languages */}
-            <div>
-              <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Languages</dt>
-              <dd
-                className={clsx(
-                  sizeLookup.find(object => object.size === size).value,
-                  bold && "font-black",
-                  italics && "italic",
-                  underlined && "underline",
-                  font && font.font.className,
-                  "mt-1 text-gray-900 sm:col-span-2"
-                )}
-              >
-                English - Upper Intermediate B2
-              </dd>
-              <dd
-                className={clsx(
-                  sizeLookup.find(object => object.size === size).value,
-                  bold && "font-black",
-                  italics && "italic",
-                  underlined && "underline",
-                  font && font.font.className,
-                  "mt-1 text-gray-900 sm:col-span-2"
-                )}
-              >
-                Slovak - Native Speaker C1
-              </dd>
-            </div>
-            {/* courses */}
-            <div className="">
-              <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Courses</dt>
-              <dd
-                className={clsx(
-                  sizeLookup.find(object => object.size === size).value,
-                  bold && "font-black",
-                  italics && "italic",
-                  underlined && "underline",
-                  font && font.font.className,
-                  "mt-1 text-gray-900 sm:col-span-2"
-                )}
-              >
-                <ul className="flex flex-col gap-2">
-                  <li>
-                    <a href="https://www.udemy.com/certificate/UC-192ffbd0-401d-42d7-b0a2-1483ef07114e/">JavaScript</a>
-                  </li>
-                  <li>
-                    <a href="https://www.udemy.com/certificate/UC-145a8464-35d5-4780-bdda-5f06d100db40/">
-                      Git & GitHub
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.udemy.com/certificate/UC-05c7d9be-f243-4a2b-b2a8-717e4efa597c/">
-                      React & TypeScript
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.udemy.com/certificate/UC-4d17d0b8-f5a4-4283-bca6-cccca798f179/">
-                      MySQL Bootcamp
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.udemy.com/course/nodejs-tutorial-and-projects-course/">NodeJS</a>
-                  </li>
-                </ul>
-              </dd>
-            </div>
-            {/* experience */}
-            <div>
-              <dt className={"text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0"}>Experience</dt>
-              <dd
-                className={clsx(
-                  sizeLookup.find(object => object.size === size).value,
-                  bold && "font-black",
-                  italics && "italic",
-                  underlined && "underline",
-                  font && font.font.className,
-                  "mt-1 text-gray-900 sm:col-span-2"
-                )}
-              >
-                Technical Care Representative at AT&T
-              </dd>
-              <dd
-                className={clsx(
-                  sizeLookup.find(object => object.size === size).value,
-                  bold && "font-black",
-                  italics && "italic",
-                  underlined && "underline",
-                  font && font.font.className,
-                  "mt-2 text-gray-900 sm:col-span-2"
-                )}
-              >
-                <time dateTime="2023-06-16">June 2023 - present</time>
-              </dd>
-
-              <ul
-                className={clsx(
-                  sizeLookup.find(object => object.size === size).value,
-                  bold && "font-black",
-                  italics && "italic",
-                  underlined && "underline",
-                  font && font.font.className,
-                  "mt-2 list-disc text-gray-900 sm:col-span-2 ml-4"
-                )}
-              >
-                <li>Handled a range of issues related to AT&T products & services</li>
-                <li>Technical advisory and device troubleshooting</li>
-                <li>Strong command of internal tools and exceptional knowledge of products</li>
-              </ul>
-            </div>
+            <Cell
+              title="Languages"
+              body={
+                <>
+                  <p>English - Upper Intermediate B2</p>
+                  <p>Slovak - Native Speaker C1</p>
+                </>
+              }
+            />
+            <Cell
+              title="Courses"
+              body={
+                <div className="flex flex-col gap-1">
+                  <a href="https://www.udemy.com/certificate/UC-05c7d9be-f243-4a2b-b2a8-717e4efa597c/">
+                    React & TypeScript
+                  </a>
+                  <a href="https://www.udemy.com/certificate/UC-192ffbd0-401d-42d7-b0a2-1483ef07114e/">JavaScript</a>
+                  <a href="https://www.udemy.com/certificate/UC-145a8464-35d5-4780-bdda-5f06d100db40/">Git & GitHub</a>
+                  <a href="https://www.udemy.com/certificate/UC-4d17d0b8-f5a4-4283-bca6-cccca798f179/">
+                    MySQL Bootcamp
+                  </a>
+                  <a href="https://www.udemy.com/course/nodejs-tutorial-and-projects-course/">NodeJS</a>
+                </div>
+              }
+            />
+            <Cell
+              title="Experience"
+              body={
+                <>
+                  <p>Technical Care Representative at AT&T</p>
+                  <p>
+                    <time dateTime="2023-06-16">June 2023 - present</time>
+                  </p>
+                  <ul className={"mt-2 list-disc text-gray-900 sm:col-span-2 ml-4"}>
+                    <li>Handled a range of issues related to AT&T products & services</li>
+                    <li>Technical advisory and device troubleshooting</li>
+                    <li>Strong command of internal tools and exceptional knowledge of products</li>
+                  </ul>
+                </>
+              }
+            />
           </dl>
         </div>
       </div>
     </div>
   );
 }
-const fonts: Font[] = [
-  {
-    label: "MS Sans Serif",
-    font: msSansSerif,
-    value: "mssansserif",
-  },
-  {
-    label: "Roboto",
-    font: roboto,
-    value: "roboto",
-  },
-  {
-    label: "Fira Sans",
-    font: firaSans,
-    value: "firasans",
-  },
-];
 
-const sizes: Size[] = [
-  {
-    label: "12",
-    value: "text-xs",
-  },
-  {
-    label: "14",
-    value: "text-sm",
-  },
-  {
-    label: "16",
-    value: "text-base",
-  },
-  {
-    label: "18",
-    value: "text-lg",
-  },
-  {
-    label: "20",
-    value: "text-xl",
-  },
-];
 export default function page() {
-  const [font, setFont] = useState<Font>(fonts[0]);
-  const [size, setSize] = useState<Size>(sizes[1]);
-
-  function handleChangeFont(e: ChangeEvent<HTMLSelectElement>) {
-    const font = fonts.find(option => option.value === e.target.value);
-    if (font) setFont(font);
-    return;
-  }
-
   return (
     <Window className="w-full h-[calc(100vh-34px)]">
       <Window.Header>CV</Window.Header>
       <Window.Toolbar>
         <Navbar />
         <Toolbar />
-        <TextPreferences font={font} fonts={fonts} handleChangeFont={handleChangeFont} />
+        <TextPreferences />
       </Window.Toolbar>
       <Window.Body
         variant="window"
         className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]  overflow-hidden"
       >
-        <Document font={font} />
+        <Document />
       </Window.Body>
       <Window.Footer className="flex gap-1">
         <div className="w-2/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
