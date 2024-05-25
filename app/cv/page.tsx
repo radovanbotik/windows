@@ -46,15 +46,17 @@ function Navbar() {
     <div className="px-2 space-x-4  border-b-2 border-b-stone-500">
       <MenuDropdown menuButton={{ title: "File" }}>
         <Button variant="toolbar">New Document</Button>
-        <Button variant="toolbar">Download Document</Button>
+        <a className="px-1 text-sm" href="/radovan_botik_en.pdf" download={true}>
+          Download Document
+        </a>
       </MenuDropdown>
       <MenuDropdown menuButton={{ title: "View" }}>
-        <Button variant="toolbar">View Before print</Button>
-        <Button variant="toolbar">View Before print</Button>
+        <Button variant="toolbar" href="/radovan_botik_en.pdf">
+          View Before print
+        </Button>
       </MenuDropdown>
       <MenuDropdown menuButton={{ title: "Tools" }}>
         <Button variant="toolbar">Start drawing</Button>
-        <Button variant="toolbar">Disable tooltips</Button>
       </MenuDropdown>
     </div>
   );
