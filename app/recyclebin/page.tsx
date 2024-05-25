@@ -3,6 +3,8 @@ import { Window } from "../UI/Window";
 import directory from "../../public/icons/directory48.png";
 import file from "../../public/icons/file32.png";
 import Icon from "../UI/Icon";
+import MenuDropdown from "../UI/MenuDropdown";
+import Button from "../UI/Button";
 
 const icons = [
   {
@@ -22,8 +24,23 @@ export default function page() {
     <div className="w-full h-[calc(100vh-34px)]">
       <Window className="w-full h-full">
         <Window.Header>Recycle Bin</Window.Header>
-        <Window.Toolbar>
-          <p className="first-letter:underline">Hello</p>
+        <Window.Toolbar className="space-x-2">
+          <MenuDropdown menuButton={{ title: "View" }}>
+            <Button variant="toolbar" onClick={() => console.log("Tiles")}>
+              Tiles
+            </Button>
+            <Button variant="toolbar" onClick={() => console.log("List")}>
+              List
+            </Button>
+          </MenuDropdown>
+          <MenuDropdown menuButton={{ title: "Options" }}>
+            <Button variant="toolbar" onClick={() => console.log("Emptied")}>
+              Empty Recyclebin
+            </Button>
+            <Button variant="toolbar" onClick={() => console.log("Restored")}>
+              Restore Items
+            </Button>
+          </MenuDropdown>
         </Window.Toolbar>
         <Window.Body className="p-2">
           <div className="w-full h-full flex  gap-4 flex-wrap content-start px-2">

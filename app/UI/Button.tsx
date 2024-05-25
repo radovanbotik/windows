@@ -10,6 +10,7 @@ const variantStyles = {
     "text-black text-md px-1  bg-[#C0C0C0] border-2 border-t-[#FFFFFF] border-r-[#808080] border-b-[#808080] border-l-[#FFFFFF] shadow-[1px_1px_0px_0px_#0000007f]",
   systemPushed:
     "text-black text-md px-1  bg-[#cdcdcd] border-2 border-b-[#FFFFFF] border-l-[#808080] border-t-[#808080] border-r-[#FFFFFF] shadow-[1px_1px_0px_0px_#0000007f]",
+  toolbar: "px-1 text-sm",
 };
 
 type Props = {

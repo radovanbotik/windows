@@ -8,9 +8,10 @@ import szeged from "../../public/pictures/szeged.jpg";
 import vienna from "../../public/pictures/vienna.jpg";
 import Image, { StaticImageData } from "next/image";
 import { ComponentPropsWithoutRef, useState } from "react";
-import ToolbarMenu from "../UI/ToolbarMenu";
 import clsx from "clsx";
 import Modal from "../UI/Modal";
+import MenuDropdown from "../UI/MenuDropdown";
+import Button from "../UI/Button";
 
 const pictures = [
   {
@@ -72,6 +73,25 @@ function Tile({
   );
 }
 
+function Toolbar({ handleSelect }: { handleSelect: (arg: "tiles" | "list") => void }) {
+  return (
+    <>
+      <MenuDropdown menuButton={{ title: "View" }}>
+        <Button variant="toolbar" onClick={() => handleSelect("tiles")}>
+          View as Tiles
+        </Button>
+        <Button variant="toolbar" onClick={() => handleSelect("list")}>
+          View as List
+        </Button>
+      </MenuDropdown>
+      <MenuDropdown menuButton={{ title: "Help" }}>
+        <Button variant="toolbar">Get help</Button>
+        <Button variant="toolbar">Info</Button>
+      </MenuDropdown>
+    </>
+  );
+}
+
 export default function page() {
   const [selectedImage, setSelectedImage] = useState<{ name: string; src: StaticImageData } | null>(null);
   const [view, setView] = useState<"tiles" | "list">("list");
@@ -82,37 +102,17 @@ export default function page() {
     setIsOpen(true);
   }
 
-  function handleSelectView(value: string) {
+  function handleSelectView(value: "tiles" | "list") {
     console.log(value);
     if (value === "tiles" || value === "list") setView(value);
     return;
   }
 
-  const viewOptions = [
-    {
-      name: "View",
-      actions: [
-        {
-          name: "View as Tiles",
-          value: "tiles",
-        },
-        {
-          name: "View as List",
-          value: "list",
-        },
-      ],
-    },
-  ];
-
   return (
     <Window className="w-full h-[calc(100vh-34px)]">
       <Window.Header>Pictures</Window.Header>
-      <Window.Toolbar>
-        {viewOptions.map(option => (
-          <ToolbarMenu key={option.name} actions={option.actions} handleSelect={handleSelectView}>
-            {option.name}
-          </ToolbarMenu>
-        ))}
+      <Window.Toolbar className="flex space-x-4">
+        <Toolbar handleSelect={handleSelectView} />
       </Window.Toolbar>
       <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]">
         <div

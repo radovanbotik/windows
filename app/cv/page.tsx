@@ -10,70 +10,10 @@ import Image from "next/image";
 
 import clsx from "clsx";
 import Select from "../UI/Select";
-import ToolbarMenu from "../UI/ToolbarMenu";
 import { useDocContext } from "./context";
 import { fontLookup, sizeLookup, sizes, fonts } from "../lib/worddata";
 import { ComponentPropsWithoutRef, ReactNode } from "react";
-
-const actions = [
-  {
-    name: "File",
-    actions: [
-      {
-        name: "New Document",
-        href: "#",
-      },
-      // {
-      //   name: "Save Document",
-      //   href: "#",
-      // },
-      {
-        name: "Download Document",
-        href: "#",
-      },
-    ],
-  },
-  // {
-  //   name: "Edit",
-  //   href: "#",
-  //   actions: [
-  //     {
-  //       name: "Download",
-  //       href: "#",
-  //     },
-  //   ],
-  // },
-  {
-    name: "View",
-    href: "#",
-    actions: [
-      {
-        name: "View before print",
-        href: "#",
-      },
-    ],
-  },
-  {
-    name: "Tools",
-    href: "#",
-    actions: [
-      {
-        name: "Start Drawing",
-        href: "#",
-      },
-    ],
-  },
-  {
-    name: "Help",
-    href: "#",
-    actions: [
-      {
-        name: "Disable Tooltips",
-        href: "#",
-      },
-    ],
-  },
-];
+import MenuDropdown from "../UI/MenuDropdown";
 
 const shortcuts = [
   {
@@ -103,12 +43,19 @@ const shortcuts = [
 
 function Navbar() {
   return (
-    <div className="flex gap-4 p-1 border-b-2 border-b-stone-500">
-      {actions.map(action => (
-        <ToolbarMenu key={action.name} {...action} className="leading-none">
-          {action.name}
-        </ToolbarMenu>
-      ))}
+    <div className="px-2 space-x-4  border-b-2 border-b-stone-500">
+      <MenuDropdown menuButton={{ title: "File" }}>
+        <Button variant="toolbar">New Document</Button>
+        <Button variant="toolbar">Download Document</Button>
+      </MenuDropdown>
+      <MenuDropdown menuButton={{ title: "View" }}>
+        <Button variant="toolbar">View Before print</Button>
+        <Button variant="toolbar">View Before print</Button>
+      </MenuDropdown>
+      <MenuDropdown menuButton={{ title: "Tools" }}>
+        <Button variant="toolbar">Start drawing</Button>
+        <Button variant="toolbar">Disable tooltips</Button>
+      </MenuDropdown>
     </div>
   );
 }
