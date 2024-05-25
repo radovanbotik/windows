@@ -137,29 +137,7 @@ function Body({ children }: { children: ReactNode }) {
       <div className="bg-windows-white px-1 py-4 sm:p-4">
         <Tree />
       </div>
-      <div className="flex flex-col">
-        <div className="grid grid-cols-[32px_32px_32px_1fr_1fr_1fr] w-full border-2 border-gray-600">
-          <Button variant="windows" className="inline-grid w-full">
-            !
-          </Button>
-          <Button variant="windows" className="inline-grid  w-full">
-            <Image src={envelopeclosed} alt="unopened" />
-          </Button>
-          <Button variant="windows" className="inline-grid  w-full">
-            <Image src={template} alt="attachment" />
-          </Button>
-          <Button variant="system" className="inline-grid  w-full">
-            From
-          </Button>
-          <Button variant="system" className="inline-grid  w-full">
-            Subject
-          </Button>
-          <Button variant="system" className="inline-grid  w-full">
-            Date
-          </Button>
-        </div>
-        <div className="bg-windows-white flex-auto overscroll-y">{children}</div>
-      </div>
+      <div className="flex flex-col">{children}</div>
     </div>
   );
 }

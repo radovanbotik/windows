@@ -10,6 +10,11 @@ export type Email = {
   attachment: boolean;
 };
 
+export type Contact = {
+  name: string;
+  email: string;
+};
+
 export const receivedEmails: Email[] = [
   {
     id: 1,
@@ -69,5 +74,19 @@ export const deletedEmails: Email[] = [
     important: false,
     opened: false,
     attachment: false,
+  },
+];
+export const contacts: Contact[] = [
+  {
+    name: "pope francis",
+    email: "popefrancis@yahoo.com",
+  },
+  {
+    name: "joe biden",
+    email: "joebiden@gmail.com",
+  },
+  {
+    name: "nelli szeno",
+    email: "nelli@gmail.com",
   },
 ];

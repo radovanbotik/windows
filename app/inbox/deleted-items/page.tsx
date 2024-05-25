@@ -6,9 +6,10 @@ import envelopeopen from "../../../public/icons/envelopeopen16.png";
 import template from "../../../public/icons/template16.png";
 import Modal from "../../UI/Modal";
 import { useState } from "react";
-import { deletedEmails,type Email } from "@/app/lib/inboxdata";
+import { deletedEmails, Email } from "../../lib/inboxdata";
+import Button from "../../UI/Button";
 
-function Email({
+function EmailRow({
   id,
   from,
   subject,
@@ -48,7 +49,6 @@ function Email({
 }
 
 export default function Page() {
-  
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
 
@@ -63,18 +63,40 @@ export default function Page() {
 
   return (
     <>
-      <ul className="flex flex-col  space-y-1">
-        {deletedEmails.map(email => (
-          <Email key={email.id} {...email} selectEmail={selectEmail} />
-        ))}
-      </ul>
-      <Modal
-        setIsOpen={setIsOpen}
-        open={isOpen}
-        title={`Email from ${selectedEmail?.from}`}
-        description={selectedEmail?.subject}
-        body={<p className="max-w-sm">{selectedEmail?.body}</p>}
-      />
+      <div className="grid grid-cols-[32px_32px_32px_1fr_1fr_1fr] w-full border-2 border-gray-600">
+        <Button variant="windows" className="inline-grid w-full">
+          !
+        </Button>
+        <Button variant="windows" className="inline-grid  w-full">
+          <Image src={envelopeclosed} alt="unopened" />
+        </Button>
+        <Button variant="windows" className="inline-grid  w-full">
+          <Image src={template} alt="attachment" />
+        </Button>
+        <Button variant="system" className="inline-grid  w-full">
+          From/To
+        </Button>
+        <Button variant="system" className="inline-grid  w-full">
+          Subject
+        </Button>
+        <Button variant="system" className="inline-grid  w-full">
+          Date
+        </Button>
+      </div>
+      <div className="bg-windows-white flex-auto overscroll-y">
+        <ul className="flex flex-col  space-y-1">
+          {deletedEmails.map(email => (
+            <EmailRow key={email.id} {...email} selectEmail={selectEmail} />
+          ))}
+        </ul>
+        <Modal
+          setIsOpen={setIsOpen}
+          open={isOpen}
+          title={`Email from ${selectedEmail?.from}`}
+          description={selectedEmail?.subject}
+          body={<p className="max-w-sm">{selectedEmail?.body}</p>}
+        />
+      </div>
     </>
   );
 }
