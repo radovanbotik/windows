@@ -5,6 +5,8 @@ import envelopeopen from "../../../public/icons/envelopeopen16.png";
 import template from "../../../public/icons/template16.png";
 import Link from "next/link";
 
+//to fix
+
 type EmailProps = {
   createdAt: string;
   id: number;
