@@ -59,7 +59,7 @@ const outlook = [
     name: "Outlooks express",
     icon: outlookexpress,
     actions: [
-      { name: "Inbox", href: "/inbox", icon: write },
+      { name: "Inbox", href: "/inbox/inbox", icon: write },
       { name: "Sent Items", href: "/inbox/sent-items", icon: directorycabinet },
       { name: "Deleted Items", href: "/inbox/deleted-items", icon: recyclebinempty },
       { name: "Contacts", href: "/inbox/contacts", icon: address },
@@ -137,7 +137,7 @@ function Body({ children }: { children: ReactNode }) {
       <div className="bg-windows-white px-1 py-4 sm:p-4">
         <Tree />
       </div>
-      <div className="flex flex-col">{children}</div>
+      <div className="flex flex-col bg-windows-white h-full w-full">{children}</div>
     </div>
   );
 }

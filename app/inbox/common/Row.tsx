@@ -1,10 +1,9 @@
-"use client";
+// "use client";
 import Image from "next/image";
 import envelopeclosed from "../../../public/icons/envelopeclosed16.png";
 import envelopeopen from "../../../public/icons/envelopeopen16.png";
 import template from "../../../public/icons/template16.png";
-import { useState } from "react";
-import Modal from "@/app/UI/Modal";
+import Link from "next/link";
 
 type EmailProps = {
   createdAt: string;
@@ -19,12 +18,10 @@ type EmailProps = {
   authorId: string | null;
 };
 
-export default function Row({ id, from, subject, createdAt, body, important, opened, attachment }: EmailProps) {
-  const [isOpen, setIsOpen] = useState(false);
-
+export default function Row({ id, from, subject, createdAt, important, opened, attachment }: EmailProps) {
   return (
-    <>
-      <li className="cursor-pointer" onClick={() => setIsOpen(true)}>
+    <li className="cursor-pointer">
+      <Link href={`/inbox/inbox/${id}`}>
         <div className="grid grid-cols-[32px_32px_32px_1fr_1fr_1fr] border-b border-windows-gray-200">
           <div className="inline-grid place-content-center w-full">{important && "!"}</div>
           <div className="inline-grid place-content-center w-full ">
@@ -48,14 +45,7 @@ export default function Row({ id, from, subject, createdAt, body, important, ope
             <p className="truncate">{createdAt}</p>
           </div>
         </div>
-      </li>
-      <Modal
-        title={`Mail From ${from}`}
-        description={subject}
-        body={<p className="max-w-xs">{body}</p>}
-        open={isOpen}
-        setIsOpen={setIsOpen}
-      />
-    </>
+      </Link>
+    </li>
   );
 }

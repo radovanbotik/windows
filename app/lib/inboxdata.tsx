@@ -102,3 +102,11 @@ export async function getInbox() {
   const inbox = emails.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
   return inbox;
 }
+
+export async function getEmail(id: string) {
+  const data = await prisma.email.findUnique({ where: { id: id } });
+  if (data) {
+    const email = { ...data, createdAt: data.createdAt.toLocaleDateString() };
+    return email;
+  }
+}
