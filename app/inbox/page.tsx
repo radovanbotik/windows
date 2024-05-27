@@ -6,6 +6,19 @@ import { getReceivedEmails, getSentEmails, getDeletedEmails } from "../lib/inbox
 import Button from "../UI/Button";
 import Row from "./common/Row";
 
+type EmailProps = {
+  createdAt: string;
+  id: number;
+  from: string;
+  to: string;
+  subject: string;
+  body: string;
+  important: boolean;
+  opened: boolean;
+  attachment: boolean;
+  authorId: number | null;
+  deleted: boolean;
+};
 type InboxProps = Prisma.PromiseReturnType<typeof getReceivedEmails>;
 type PageProps = {
   params: { id: string };
@@ -15,7 +28,7 @@ type PageProps = {
 export default async function Page({ params, searchParams }: PageProps) {
   const emailType = searchParams.emails;
 
-  let receivedEmails: InboxProps | null = null;
+  let receivedEmails: EmailProps[] | null = null;
   if (emailType === "received") receivedEmails = await getReceivedEmails();
   if (emailType === "sent") receivedEmails = await getSentEmails();
   if (emailType === "deleted") receivedEmails = await getDeletedEmails();
