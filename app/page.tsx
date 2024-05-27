@@ -41,9 +41,9 @@ function ModalBody({
         >
           Play My Music
         </Button>
-        <Button variant="system" className="py-1 capitalize w-full text-center" onClick={() => setIsOpen(false)}>
+        {/* <Button variant="system" className="py-1 capitalize w-full text-center" onClick={() => setIsOpen(false)}>
           About
-        </Button>
+        </Button> */}
       </div>
       {/* check input*/}
       <div className="ml-1">
@@ -105,13 +105,13 @@ export default function Home() {
   }, []);
   return (
     <div className="w-full h-full relative">
-      <Modal
+      {/* <Modal
         title="Welcome"
         description={<h1 className="text-2xl font-bold my-1 sm:my-2 text-center">Hi, I'm Rado</h1>}
         body={<ModalBody setIsOpen={setIsOpen} handleDoNotDisplay={handleDoNotDisplay} />}
         open={isOpen}
         setIsOpen={setIsOpen}
-      />
+      /> */}
     </div>
   );
 }
