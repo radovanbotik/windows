@@ -6,7 +6,7 @@ type PageProps = {
 };
 
 export default async function Page({ params, searchParams }: PageProps) {
-  const email = await getEmail(params.id);
+  const email = await getEmail(Number(params.id));
   console.log(email);
 
   return (
