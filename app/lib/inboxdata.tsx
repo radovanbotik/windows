@@ -33,7 +33,7 @@ export const receivedEmails: Email[] = [
     to: "radovanb@gmail.com",
     subject: "blessings from vatican",
     date: "05/20/2024",
-    body: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere neque corporis mollitia veniam maiores eligendi sint sed commodi nemo laudantium, accusamus dolore perspiciatis esse provident ex dicta ipsam, enim molestiae optio error saepe illo. Dolores deserunt et neque assumenda dicta id quam enim magnam doloribus ratione doloremque, aut dolor eum?",
+    body: "Dear Rado, Blessings upon you. May God's grace and peace fill your heart. You are in my prayers. Continue to spread love and compassion. In Christ, Pope Francis",
     important: false,
     opened: false,
     attachment: false,
