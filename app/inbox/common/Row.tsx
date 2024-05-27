@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import Image from "next/image";
 import envelopeclosed from "../../../public/icons/envelopeclosed16.png";
 import envelopeopen from "../../../public/icons/envelopeopen16.png";
@@ -22,7 +22,7 @@ type EmailProps = {
 export default function Row({ id, from, subject, createdAt, important, opened, attachment }: EmailProps) {
   return (
     <li className="cursor-pointer">
-      <Link href={`/inbox/inbox/${id}`}>
+      <Link href={`inbox/${id}`}>
         <div className="grid grid-cols-[32px_32px_32px_1fr_1fr_1fr] border-b border-windows-gray-200">
           <div className="inline-grid place-content-center w-full">{important && "!"}</div>
           <div className="inline-grid place-content-center w-full ">
