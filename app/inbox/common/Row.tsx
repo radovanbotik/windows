@@ -7,7 +7,7 @@ import Link from "next/link";
 
 type EmailProps = {
   createdAt: string;
-  id: string;
+  id: number;
   from: string;
   to: string;
   subject: string;
@@ -15,7 +15,8 @@ type EmailProps = {
   important: boolean;
   opened: boolean;
   attachment: boolean;
-  authorId: string | null;
+  authorId: number | null;
+  deleted: boolean;
 };
 
 export default function Row({ id, from, subject, createdAt, important, opened, attachment }: EmailProps) {

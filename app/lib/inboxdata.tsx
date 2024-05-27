@@ -33,7 +33,7 @@ export const receivedEmails: Email[] = [
     id: 2,
     from: "popefrancis@yahoo.com",
     to: "radovanb@gmail.com",
-    subject: "blessings from vatican",
+    subject: "Blessings from Vatican",
     date: "05/20/2024",
     body: "Dear Rado, Blessings upon you. May God's grace and peace fill your heart. You are in my prayers. Continue to spread love and compassion. In Christ, Pope Francis",
     important: false,
@@ -93,17 +93,34 @@ export const contacts: Contact[] = [
   },
 ];
 
-export async function getInbox() {
-  const emails = await prisma.email.findMany({
+export async function getReceivedEmails() {
+  const data = await prisma.email.findMany({
     where: {
       to: "radovanb@gmail.com",
+      deleted: false,
     },
   });
-  const inbox = emails.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
-  return inbox;
+  const emails = data.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
+  return emails;
 }
 
-export async function getEmail(id: string) {
+export async function getSentEmails() {
+  const data = await prisma.email.findMany({
+    where: { from: "radovanb@gmail.com" },
+  });
+  const emails = data.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
+  return emails;
+}
+
+export async function getDeletedEmails() {
+  const data = await prisma.email.findMany({
+    where: { deleted: true },
+  });
+  const emails = data.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
+  return emails;
+}
+
+export async function getEmail(id: number) {
   const data = await prisma.email.findUnique({ where: { id: id } });
   if (data) {
     const email = { ...data, createdAt: data.createdAt.toLocaleDateString() };

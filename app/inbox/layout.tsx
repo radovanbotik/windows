@@ -59,9 +59,9 @@ const outlook = [
     name: "Outlooks express",
     icon: outlookexpress,
     actions: [
-      { name: "Inbox", href: "/inbox/inbox", icon: write },
-      { name: "Sent Items", href: "/inbox/sent-items", icon: directorycabinet },
-      { name: "Deleted Items", href: "/inbox/deleted-items", icon: recyclebinempty },
+      { name: "Inbox", href: "/inbox?emails=received", icon: write },
+      { name: "Sent Items", href: "/inbox?emails=sent", icon: directorycabinet },
+      { name: "Deleted Items", href: "/inbox?emails=deleted", icon: recyclebinempty },
       { name: "Contacts", href: "/inbox/contacts", icon: address },
     ],
   },
