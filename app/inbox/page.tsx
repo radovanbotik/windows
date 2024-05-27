@@ -1,4 +1,4 @@
-// import { Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import envelopeclosed from "../../public/icons/envelopeclosed16.png";
 import template from "../../public/icons/template16.png";
@@ -6,20 +6,20 @@ import { getReceivedEmails, getSentEmails, getDeletedEmails } from "../lib/inbox
 import Button from "../UI/Button";
 import Row from "./common/Row";
 
-type EmailProps = {
-  createdAt: string;
-  id: number;
-  from: string;
-  to: string;
-  subject: string;
-  body: string;
-  important: boolean;
-  opened: boolean;
-  attachment: boolean;
-  authorId: number | null;
-  deleted: boolean;
-};
-// type InboxProps = Prisma.PromiseReturnType<typeof getReceivedEmails>;
+// type EmailProps = {
+//   createdAt: string;
+//   id: number;
+//   from: string;
+//   to: string;
+//   subject: string;
+//   body: string;
+//   important: boolean;
+//   opened: boolean;
+//   attachment: boolean;
+//   authorId: number | null;
+//   deleted: boolean;
+// };
+type InboxProps = Prisma.PromiseReturnType<typeof getReceivedEmails>;
 type PageProps = {
   params: { id: string };
   searchParams: { [key: string]: string | string[] | undefined };
@@ -28,7 +28,7 @@ type PageProps = {
 export default async function Page({ params, searchParams }: PageProps) {
   const emailType = searchParams.emails;
 
-  let receivedEmails: EmailProps[] | null = null;
+  let receivedEmails: InboxProps | null = null;
   if (emailType === "received") receivedEmails = await getReceivedEmails();
   if (emailType === "sent") receivedEmails = await getSentEmails();
   if (emailType === "deleted") receivedEmails = await getDeletedEmails();

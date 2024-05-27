@@ -101,7 +101,7 @@ export async function getReceivedEmails() {
       deleted: false,
     },
   });
-  const emails: EmailProps[] = data.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
+  const emails = data.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
   return emails;
 }
 
@@ -109,7 +109,7 @@ export async function getSentEmails() {
   const data = await prisma.email.findMany({
     where: { from: "radovanb@gmail.com" },
   });
-  const emails: EmailProps[] = data.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
+  const emails = data.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
   return emails;
 }
 
@@ -117,7 +117,7 @@ export async function getDeletedEmails() {
   const data = await prisma.email.findMany({
     where: { deleted: true },
   });
-  const emails: EmailProps[] = data.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
+  const emails = data.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
   return emails;
 }
 
