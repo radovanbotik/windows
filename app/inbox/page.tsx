@@ -8,50 +8,39 @@ import Modal from "../UI/Modal";
 import { useState } from "react";
 import { Email, getInbox } from "../lib/inboxdata";
 import Button from "../UI/Button";
+import Row from "./common/Row";
 
 type InboxProps = Prisma.PromiseReturnType<typeof getInbox>;
-type EmailProps = {
-  createdAt: string;
-  id: string;
-  from: string;
-  to: string;
-  subject: string;
-  body: string;
-  important: boolean;
-  opened: boolean;
-  attachment: boolean;
-  authorId: string | null;
-};
 
-function EmailRow({ id, from, subject, createdAt, important, opened, attachment }: EmailProps) {
-  return (
-    <li className="cursor-pointer">
-      <div className="grid grid-cols-[32px_32px_32px_1fr_1fr_1fr] border-b border-windows-gray-200">
-        <div className="inline-grid place-content-center w-full">{important && "!"}</div>
-        <div className="inline-grid place-content-center w-full ">
-          <Image
-            src={opened ? envelopeopen : envelopeclosed}
-            width={16}
-            height={16}
-            alt={opened ? "opened" : "closed"}
-          />
-        </div>
-        <div className="inline-grid place-content-center w-full ">
-          {attachment && <Image src={template} width={16} height={16} alt="attachment" className="w-full h-full" />}
-        </div>
-        <div className="inline-grid place-content-center w-full px-4">
-          <p className="truncate">{from}</p>
-        </div>
-        <div className="inline-grid place-content-center w-full px-4">
-          <p className="truncate">{subject}</p>
-        </div>
-        <div className="inline-grid place-content-center w-full px-4">
-          <p className="truncate">{createdAt}</p>
-        </div>
-      </div>
-    </li>
-  );
-}
+// function EmailRow({ id, from, subject, createdAt, important, opened, attachment }: EmailProps) {
+//   return (
+//     <li className="cursor-pointer">
+//       <div className="grid grid-cols-[32px_32px_32px_1fr_1fr_1fr] border-b border-windows-gray-200">
+//         <div className="inline-grid place-content-center w-full">{important && "!"}</div>
+//         <div className="inline-grid place-content-center w-full ">
+//           <Image
+//             src={opened ? envelopeopen : envelopeclosed}
+//             width={16}
+//             height={16}
+//             alt={opened ? "opened" : "closed"}
+//           />
+//         </div>
+//         <div className="inline-grid place-content-center w-full ">
+//           {attachment && <Image src={template} width={16} height={16} alt="attachment" className="w-full h-full" />}
+//         </div>
+//         <div className="inline-grid place-content-center w-full px-4">
+//           <p className="truncate">{from}</p>
+//         </div>
+//         <div className="inline-grid place-content-center w-full px-4">
+//           <p className="truncate">{subject}</p>
+//         </div>
+//         <div className="inline-grid place-content-center w-full px-4">
+//           <p className="truncate">{createdAt}</p>
+//         </div>
+//       </div>
+//     </li>
+//   );
+// }
 
 export default async function Page() {
   const receivedEmails: InboxProps = await getInbox();
@@ -81,7 +70,7 @@ export default async function Page() {
       <div className="bg-windows-white flex-auto overscroll-y">
         <ul className="flex flex-col  space-y-1">
           {receivedEmails.map(email => (
-            <EmailRow key={email.id} {...email} />
+            <Row key={email.id} {...email} />
           ))}
         </ul>
       </div>
