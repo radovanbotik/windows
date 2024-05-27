@@ -6,7 +6,7 @@ import { getReceivedEmails, getSentEmails, getDeletedEmails } from "../lib/inbox
 import Button from "../UI/Button";
 import Row from "./common/Row";
 
-type InboxProps = Prisma.PromiseReturnType<typeof getReceivedEmails | typeof getSentEmails | typeof getDeletedEmails>;
+type InboxProps = Prisma.PromiseReturnType<typeof getReceivedEmails>;
 type PageProps = {
   params: { id: string };
   searchParams: { [key: string]: string | string[] | undefined };
