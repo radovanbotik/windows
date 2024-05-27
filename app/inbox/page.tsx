@@ -28,7 +28,7 @@ type PageProps = {
 export default async function Page({ params, searchParams }: PageProps) {
   const emailType = searchParams.emails;
 
-  let receivedEmails: EmailProps[] | null = null;
+  let receivedEmails: InboxProps | null = null;
   if (emailType === "received") receivedEmails = await getReceivedEmails();
   if (emailType === "sent") receivedEmails = await getSentEmails();
   if (emailType === "deleted") receivedEmails = await getDeletedEmails();

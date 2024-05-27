@@ -21,7 +21,7 @@ type EmailProps = {
   deleted: boolean;
 };
 
-export default function Row({ id, from, subject, createdAt, important, opened, attachment }: EmailProps) {
+export default function Row({ id, from, subject, createdAt, important, opened, attachment, deleted }: EmailProps) {
   return (
     <li className="cursor-pointer">
       <Link href={`inbox/${id}`}>
