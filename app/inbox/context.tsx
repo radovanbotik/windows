@@ -1,14 +1,17 @@
 import { ReactNode, createContext, useContext, useReducer } from "react";
-import { Email } from "../lib/inboxdata";
+import { EmailProps } from "../lib/inboxdata";
 
 // type SectionTypes = 'inbox' | 'sent' | 'deleted' | 'contacts'
-type ActionTypes = { type: "set-modal-open" } | { type: "set-modal-closed" } | { type: "set-content"; payload: Email };
+type ActionTypes =
+  | { type: "set-modal-open" }
+  | { type: "set-modal-closed" }
+  | { type: "set-content"; payload: EmailProps };
 type InitialState = {
   isModalOpen: boolean;
-  content: Email | null;
+  content: EmailProps | null;
 };
 type ContextType = InitialState & {
-  openModal: (email: Email) => void;
+  openModal: (email: EmailProps) => void;
   closeModal: () => void;
 };
 
@@ -33,7 +36,7 @@ function reducer(state: InitialState, action: ActionTypes): InitialState {
 export function Context({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function openModal(email: Email) {
+  function openModal(email: EmailProps) {
     dispatch({ type: "set-content", payload: email });
     dispatch({ type: "set-modal-open" });
   }

@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+// import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import envelopeclosed from "../../public/icons/envelopeclosed16.png";
 import template from "../../public/icons/template16.png";
