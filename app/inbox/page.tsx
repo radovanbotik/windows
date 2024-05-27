@@ -1,26 +1,31 @@
-"use client";
-
+import prisma from "../../prisma/prisma";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import envelopeclosed from "../../public/icons/envelopeclosed16.png";
 import envelopeopen from "../../public/icons/envelopeopen16.png";
 import template from "../../public/icons/template16.png";
 import Modal from "../UI/Modal";
 import { useState } from "react";
-import { receivedEmails, Email } from "../lib/inboxdata";
+import { Email, getInbox } from "../lib/inboxdata";
 import Button from "../UI/Button";
 
-function EmailRow({
-  id,
-  from,
-  subject,
-  date,
-  important,
-  opened,
-  attachment,
-  selectEmail,
-}: Email & { selectEmail: (id: number) => void }) {
+type InboxProps = Prisma.PromiseReturnType<typeof getInbox>;
+type EmailProps = {
+  createdAt: string;
+  id: string;
+  from: string;
+  to: string;
+  subject: string;
+  body: string;
+  important: boolean;
+  opened: boolean;
+  attachment: boolean;
+  authorId: string | null;
+};
+
+function EmailRow({ id, from, subject, createdAt, important, opened, attachment }: EmailProps) {
   return (
-    <li onClick={() => selectEmail(id)} className="cursor-pointer">
+    <li className="cursor-pointer">
       <div className="grid grid-cols-[32px_32px_32px_1fr_1fr_1fr] border-b border-windows-gray-200">
         <div className="inline-grid place-content-center w-full">{important && "!"}</div>
         <div className="inline-grid place-content-center w-full ">
@@ -41,25 +46,15 @@ function EmailRow({
           <p className="truncate">{subject}</p>
         </div>
         <div className="inline-grid place-content-center w-full px-4">
-          <p className="truncate">{date}</p>
+          <p className="truncate">{createdAt}</p>
         </div>
       </div>
     </li>
   );
 }
 
-export default function Page() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
-
-  function selectEmail(id: number) {
-    const email = receivedEmails.find(email => email.id === id);
-    if (email) {
-      setSelectedEmail(email);
-      setIsOpen(true);
-    }
-    return;
-  }
+export default async function Page() {
+  const receivedEmails: InboxProps = await getInbox();
 
   return (
     <>
@@ -86,16 +81,9 @@ export default function Page() {
       <div className="bg-windows-white flex-auto overscroll-y">
         <ul className="flex flex-col  space-y-1">
           {receivedEmails.map(email => (
-            <EmailRow key={email.id} {...email} selectEmail={selectEmail} />
+            <EmailRow key={email.id} {...email} />
           ))}
         </ul>
-        <Modal
-          setIsOpen={setIsOpen}
-          open={isOpen}
-          title={`Email from ${selectedEmail?.from}`}
-          description={selectedEmail?.subject}
-          body={<p className="max-w-sm">{selectedEmail?.body}</p>}
-        />
       </div>
     </>
   );

@@ -1,3 +1,5 @@
+import prisma from "../../prisma/prisma";
+
 export type Email = {
   id: number;
   from: string;
@@ -90,3 +92,13 @@ export const contacts: Contact[] = [
     email: "nelli@gmail.com",
   },
 ];
+
+export async function getInbox() {
+  const emails = await prisma.email.findMany({
+    where: {
+      to: "radovanb@gmail.com",
+    },
+  });
+  const inbox = emails.map(email => ({ ...email, createdAt: email.createdAt.toLocaleDateString() }));
+  return inbox;
+}
