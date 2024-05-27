@@ -33,7 +33,25 @@ export default async function Page({ params, searchParams }: PageProps) {
   if (emailType === "sent") receivedEmails = await getSentEmails();
   if (emailType === "deleted") receivedEmails = await getDeletedEmails();
 
-  if (!receivedEmails) return <div>no content</div>;
+  if (!receivedEmails)
+    return (
+      <div>
+        <div className="p-2">
+          <h2 className="text-7xl font-bold">Outlook</h2>
+        </div>
+        <div className="p-2 bg-windows-blue">
+          <h3 className="text-4xl font-bold indent-12 text-white">Express</h3>
+        </div>
+        {/* <div className="p-2 bg-windows-gray-900">
+          <div className="grid grid-cols-2">
+            <div></div>
+            <div>
+              <h4 className="text-white font-bold underline">Find a message:</h4>
+            </div>
+          </div>
+        </div> */}
+      </div>
+    );
   return (
     <>
       <div className="grid grid-cols-[32px_32px_32px_1fr_1fr_1fr] w-full border-2 border-gray-600">
