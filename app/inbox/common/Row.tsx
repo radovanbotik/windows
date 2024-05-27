@@ -22,10 +22,6 @@ type EmailProps = {
 export default function Row({ id, from, subject, createdAt, body, important, opened, attachment }: EmailProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  function handleClose() {
-    setIsOpen(false);
-  }
-
   return (
     <>
       <li className="cursor-pointer" onClick={() => setIsOpen(true)}>
