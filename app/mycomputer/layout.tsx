@@ -16,7 +16,12 @@ export default function layout({ children }: { children: ReactNode }) {
     <Window className="w-full h-[calc(100vh-36px)]">
       <Window.Header>My Computer</Window.Header>
       <Window.Toolbar>
-        <div className="px-2 bg-windows-white">{pathname}</div>
+        <div className="py-1 px-1 flex">
+          <div className="w-20"></div>
+          <div className="flex-auto text-black text-md px-1  bg-windows-white border-2 border-b-[#FFFFFF] border-l-[#808080] border-t-[#808080] border-r-[#FFFFFF] shadow-[1px_1px_0px_0px_#0000007f]">
+            {pathname}
+          </div>
+        </div>
       </Window.Toolbar>
       <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]">
         <div className="w-full h-full flex  gap-4 flex-wrap content-start px-2">{children}</div>

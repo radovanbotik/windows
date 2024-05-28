@@ -19,6 +19,7 @@ import Link from "next/link";
 import { ReactNode } from "react";
 import { EB_Garamond } from "next/font/google";
 import Icon from "../UI/Icon";
+import MenuDropdown from "../UI/MenuDropdown";
 
 const ebGaramond = EB_Garamond({
   weight: ["400", "500", "600", "700", "800"],
@@ -118,11 +119,22 @@ function Tree() {
 function Navbar() {
   return (
     <div className="flex border-2 border-r-0 border-t-windows-white border-l-windows-white border-b-windows-gray-400">
-      {actions.map(action => (
-        <button key={action.name} className="leading-none text-sm py-1 px-2 tracking-tight">
-          {action.name}
-        </button>
-      ))}
+      <MenuDropdown menuButton={{ title: "Open" }}>
+        <Button variant="toolbar" className="leading-none text-sm py-1 px-2 tracking-tight">
+          Received
+        </Button>
+        <Button variant="toolbar" className="leading-none text-sm py-1 px-2 tracking-tight">
+          Sent
+        </Button>
+      </MenuDropdown>
+      <MenuDropdown menuButton={{ title: "view" }}>
+        <Button variant="toolbar" className="leading-none text-sm py-1 px-2 tracking-tight">
+          Tiles
+        </Button>
+        <Button variant="toolbar" className="leading-none text-sm py-1 px-2 tracking-tight">
+          List
+        </Button>
+      </MenuDropdown>
     </div>
   );
 }

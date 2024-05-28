@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { ComponentPropsWithoutRef, ElementType } from "react";
 import Button from "./Button";
-import { usePathname } from "next/navigation";
 export function Window<T extends ElementType = "div">({
   as,
   className,
@@ -26,19 +25,14 @@ export function Window<T extends ElementType = "div">({
 
 Window.Header = function WindowHeader({ children, className }: ComponentPropsWithoutRef<"div">) {
   return (
-    <div className={clsx(className, "bg-windows-blue text-windows-white px-2 ")}>
-      <div className="flex items-center">
-        <span className="mr-auto indent-2">{children}</span>
-        <Button variant="windows" className="w-4 h-4">
-          ?
-        </Button>
-        {/* <Button variant="windows" className="w-4 h-4 ml-1" onClick={() => console.log("resize")}>
-          O
-        </Button> */}
-        <Button variant="windows" className="ml-1 w-4 h-4" href={"/"}>
-          x
-        </Button>
-      </div>
+    <div className={clsx(className, "bg-windows-blue text-windows-white flex items-center")}>
+      <span className="mr-auto">{children}</span>
+      <Button variant="windows" className="w-4 h-4">
+        ?
+      </Button>
+      <Button variant="windows" className="ml-1 w-4 h-4 mr-1" href={"/"}>
+        x
+      </Button>
     </div>
   );
 };
@@ -56,11 +50,7 @@ Window.Body = function WindowBody({
   variant,
 }: ComponentPropsWithoutRef<"div"> & { variant?: keyof typeof bodyVariants }) {
   return (
-    <div className={clsx(className, "flex-auto  overflow-y-auto ", variant && bodyVariants[variant])}>
-      {children}
-      {/* <div className="grid">{children}</div> */}
-      {/* <div className="grid grid-cols-4 grid-rows-4 grid-flow-col gap-4">{children}</div> */}
-    </div>
+    <div className={clsx(className, "flex-auto  overflow-y-auto ", variant && bodyVariants[variant])}>{children}</div>
   );
 };
 

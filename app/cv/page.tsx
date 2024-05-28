@@ -43,7 +43,7 @@ const shortcuts = [
 
 function Navbar() {
   return (
-    <div className="px-2 space-x-4  border-b-2 border-b-stone-500">
+    <div className="space-x-4  border-b-2 border-b-stone-500">
       <MenuDropdown menuButton={{ title: "File" }}>
         <Button variant="toolbar">New Document</Button>
         <a className="px-1 text-sm" href="/radovan_botik_en.pdf" download={true}>
@@ -64,7 +64,7 @@ function Navbar() {
 
 function Toolbar() {
   return (
-    <div className="flex p-1 border-b-2 border-b-stone-500">
+    <div className="flex px-1 border-b-2 border-b-stone-500">
       {shortcuts.map(shortcut => (
         <Button
           key={shortcut.name}
@@ -86,7 +86,7 @@ function TextPreferences() {
   const context = useDocContext();
 
   return (
-    <div className="flex flex-wrap p-1 gap-2 items-center ">
+    <div className="flex flex-wrap gap-2 items-center ">
       <div className="flex gap-2 flex-wrap ">
         <Select options={fonts} value={context.font} onChange={context?.changeFont} />
         <Select options={sizes} value={context.size} onChange={context?.changeSize} />
@@ -264,7 +264,7 @@ export default function page() {
       <Window.Header>CV</Window.Header>
       <Window.Toolbar>
         <Navbar />
-        <Toolbar />
+        {/* <Toolbar /> */}
         <TextPreferences />
       </Window.Toolbar>
       <Window.Body

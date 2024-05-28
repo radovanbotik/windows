@@ -15,7 +15,7 @@ export default function Icon({
       <div className="flex place-content-center h-10 w-10 p-1">
         <Image src={icon} alt={name} width={48} height={48} />
       </div>
-      <span className="truncate text-sm max-w-20">{name}</span>
+      <span className="truncate text-xs max-w-20">{name}</span>
     </Button>
   );
 }

@@ -47,7 +47,7 @@ export default function MenuDropdown({ menuButton, children, className, variant 
             </StartButton>
           </Menu.Button>
         ) : (
-          <Menu.Button className="leading-none text-black font-black text-sm">{menuButton.title}</Menu.Button>
+          <Menu.Button className="leading-none text-black capitalize text-sm">{menuButton.title}</Menu.Button>
         )}
         <Transition
           as={Fragment}
@@ -109,7 +109,7 @@ export default function MenuDropdown({ menuButton, children, className, variant 
   else
     return (
       <Menu as="div" className={clsx(className, "relative inline-block text-left")}>
-        <Menu.Button className="leading-none text-black font-black text-sm">{menuButton.title}</Menu.Button>
+        <Menu.Button className="leading-none text-black text-sm">{menuButton.title}</Menu.Button>
         <Transition
           as={Fragment}
           enter="transition ease-out duration-100"
