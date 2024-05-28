@@ -43,7 +43,7 @@ Window.Header = function WindowHeader({ children, className }: ComponentPropsWit
   );
 };
 Window.Toolbar = function WindowHeader({ children, className }: ComponentPropsWithoutRef<"div">) {
-  return <div className={clsx("px-2 py-1", className)}>{children}</div>;
+  return <div className={clsx("", className)}>{children}</div>;
 };
 
 const bodyVariants = {
