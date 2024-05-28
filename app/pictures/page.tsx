@@ -116,7 +116,7 @@ export default function page() {
   }
 
   return (
-    <Window className="w-full h-[calc(100vh-34px)]">
+    <Window className="w-full h-[calc(100vh-36px)]">
       <Window.Header>Pictures</Window.Header>
       <Window.Toolbar className="flex space-x-4 px-4">
         <Toolbar handleSelect={handleSelectView} />

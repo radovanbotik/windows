@@ -19,7 +19,7 @@ export default function Taskbar() {
   const { setXPTheme, xpTheme } = useGlobalContext();
 
   return (
-    <div className="bg-windows-gray-200 border-t-2 border-t-windows-white ">
+    <div className="bg-windows-gray-200 border-2 border-r-0 border-t-windows-white border-l-windows-white border-b-windows-gray-400">
       <div className="flex px-1 h-8 items-center">
         <MenuDropdown menuButton={{ title: "start" }} variant="start">
           <Button className="px-2 py-1 text-sm flex gap-2 items-center " onClick={() => setXPTheme()}>

@@ -210,7 +210,7 @@ function Body({ children }: { children: ReactNode }) {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <Window className="w-full h-[calc(100vh-34px)]">
+    <Window className="w-full h-[calc(100vh-36px)]">
       <Window.Header>Inbox</Window.Header>
       <Window.Toolbar className="px-0 py-0">
         <Navbar />

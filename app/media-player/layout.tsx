@@ -3,7 +3,7 @@ import { Window } from "../UI/Window";
 
 export default function layout({ children }: { children: ReactNode }) {
   return (
-    <Window className="w-full h-[calc(100vh-34px)]">
+    <Window className="w-full h-[calc(100vh-36px)]">
       <Window.Header>Media Player</Window.Header>
       <Window.Toolbar></Window.Toolbar>
       <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]">

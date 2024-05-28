@@ -13,7 +13,7 @@ export default function layout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <Window className="w-full h-[calc(100vh-34px)]">
+    <Window className="w-full h-[calc(100vh-36px)]">
       <Window.Header>My Computer</Window.Header>
       <Window.Toolbar>
         <div className="px-2 bg-windows-white">{pathname}</div>

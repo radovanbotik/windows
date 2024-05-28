@@ -260,7 +260,7 @@ function Document() {
 
 export default function page() {
   return (
-    <Window className="w-full h-[calc(100vh-34px)]">
+    <Window className="w-full h-[calc(100vh-36px)]">
       <Window.Header>CV</Window.Header>
       <Window.Toolbar>
         <Navbar />
