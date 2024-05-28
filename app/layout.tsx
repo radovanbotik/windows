@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Layout from "./UI/Layout";
 import localFont from "next/font/local";
+import { Context } from "./context";
 
 const MSSansSerif = localFont({ src: "../public/fonts/MS_Sans_Serif.ttf" });
 export const metadata: Metadata = {
@@ -22,7 +23,9 @@ export default function RootLayout({
     >
       <body className="h-full flex">
         <div className="flex w-full relative">
-          <Layout>{children}</Layout>
+          <Context>
+            <Layout>{children}</Layout>
+          </Context>
         </div>
       </body>
     </html>
