@@ -58,6 +58,7 @@ const outlook = [
   {
     name: "Outlooks express",
     icon: outlookexpress,
+    href: "/inbox",
     actions: [
       { name: "Inbox", href: "/inbox?emails=received", icon: write },
       { name: "Sent Items", href: "/inbox?emails=sent", icon: directorycabinet },
@@ -65,7 +66,7 @@ const outlook = [
       { name: "Contacts", href: "/inbox/contacts", icon: address },
     ],
   },
-  { name: "New search", icon: outlooktack, actions: [] },
+  { name: "New search", icon: outlooktack, href: "#", actions: [] },
 ];
 
 function Tree() {

@@ -49,7 +49,7 @@ function Tile({
 }: ComponentPropsWithoutRef<"button"> & {
   src: StaticImageData;
   name: string;
-  variant: "list" | "tiles";
+  variant: "list" | "tiles" | "extraLarge";
   handleClick: ({ name, src }: { name: string; src: StaticImageData }) => void;
 }) {
   const variants = {
@@ -60,6 +60,10 @@ function Tile({
     tiles: {
       button: "flex flex-col  justify-center items-center text-center",
       image: "flex place-content-center h-24 w-20 p-1",
+    },
+    extraLarge: {
+      button: "flex flex-col  justify-center items-center text-center",
+      image: "flex place-content-center h-48 w-40 p-1",
     },
   };
 
@@ -73,7 +77,7 @@ function Tile({
   );
 }
 
-function Toolbar({ handleSelect }: { handleSelect: (arg: "tiles" | "list") => void }) {
+function Toolbar({ handleSelect }: { handleSelect: (arg: "tiles" | "list" | "extraLarge") => void }) {
   return (
     <>
       <MenuDropdown menuButton={{ title: "View" }}>
@@ -82,6 +86,9 @@ function Toolbar({ handleSelect }: { handleSelect: (arg: "tiles" | "list") => vo
         </Button>
         <Button variant="toolbar" onClick={() => handleSelect("list")}>
           View as List
+        </Button>
+        <Button variant="toolbar" onClick={() => handleSelect("extraLarge")}>
+          View as extra large Icons
         </Button>
       </MenuDropdown>
       <MenuDropdown menuButton={{ title: "Help" }}>
@@ -94,7 +101,7 @@ function Toolbar({ handleSelect }: { handleSelect: (arg: "tiles" | "list") => vo
 
 export default function page() {
   const [selectedImage, setSelectedImage] = useState<{ name: string; src: StaticImageData } | null>(null);
-  const [view, setView] = useState<"tiles" | "list">("list");
+  const [view, setView] = useState<"tiles" | "list" | "extraLarge">("extraLarge");
   const [isOpen, setIsOpen] = useState(false);
 
   function handleClick(image: { name: string; src: StaticImageData }) {
@@ -102,9 +109,9 @@ export default function page() {
     setIsOpen(true);
   }
 
-  function handleSelectView(value: "tiles" | "list") {
+  function handleSelectView(value: "tiles" | "list" | "extraLarge") {
     console.log(value);
-    if (value === "tiles" || value === "list") setView(value);
+    if (value === "tiles" || value === "list" || value === "extraLarge") setView(value);
     return;
   }
 
@@ -117,8 +124,10 @@ export default function page() {
       <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]">
         <div
           className={clsx(
-            "w-full h-full flex  flex-wrap content-start px-2",
-            view === "tiles" ? "flex-row gap-4" : "flex-col gap-1"
+            "w-full h-full flex flex-row flex-wrap px-2",
+            view === "tiles" && "flex-row gap-4 items-start",
+            view === "list" && "flex-col gap-1",
+            view === "extraLarge" && "flex-row gap-2 items-start"
           )}
         >
           {pictures.map(picture => (
