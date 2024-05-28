@@ -4,6 +4,11 @@ import Button from "../UI/Button";
 import outlookexpress from "../../public/icons/outlookexpress16.png";
 import recyclebinempty from "../../public/icons/recyclebinempty16.png";
 import directorycabinet from "../../public/icons/directorycabinet16.png";
+import recyclebinempty48 from "../../public/icons/recyclebinempty48.png";
+import briefcase48 from "../../public/icons/briefcase48.png";
+import users48 from "../../public/icons/users48.png";
+import notepad48 from "../../public/icons/notepad48.png";
+import calendar48 from "../../public/icons/calendar48.png";
 import write from "../../public/icons/write16.png";
 import address from "../../public/icons/address16.png";
 import signatureno from "../../public/icons/signatureno16.png";
@@ -136,12 +141,12 @@ function Quicklinks() {
 
 function Body({ children }: { children: ReactNode }) {
   return (
-    <div className={`flex flex-col p-2 sm:flex-row bg-windows-gray-200 gap-1`}>
+    <div className={`flex flex-col p-2 sm:flex-row bg-windows-gray-200 gap-1  `}>
       <div className="bg-windows-gray-400 flex flex-col border-2 border-t-black border-l-black border-r-windows-white border-b-windows-white">
-        <div className="bg-windows-gray-200  px-2 sm:px-12 border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+        <div className="bg-windows-gray-200  px-2 sm:px-10 border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
           <p className="tracking-tight text-center text-sm ">Outlook</p>
         </div>
-        <div className="py-2 px-2 sm:py-6 flex flex-row sm:flex-col flex-wrap gap-6 sm:gap-12 items-start sm:items-center mb-auto">
+        <div className="h-full flex flex-row sm:flex-col flex-wrap  justify-around mb-auto">
           <Icon
             name="Inbox (50)"
             href="/inbox"
@@ -151,38 +156,38 @@ function Body({ children }: { children: ReactNode }) {
           <Icon
             name="Calendar"
             href="/inbox/calendar"
-            icon={template}
+            icon={calendar48}
             className="text-windows-white capitalize tracking-tight"
           />
           <Icon
             name="Contacts"
             href="/inbox/contacts"
-            icon={template}
+            icon={users48}
             className="text-windows-white capitalize tracking-tight"
           />
           <Icon
             name="Tasks"
             href="/inbox/tasks"
-            icon={template}
+            icon={briefcase48}
             className="text-windows-white capitalize tracking-tight"
           />
           <Icon
             name="Notes"
             href="/inbox/notes"
-            icon={template}
+            icon={notepad48}
             className="text-windows-white capitalize tracking-tight"
           />
           <Icon
             name="Recycle Bin"
             href="/inbox/recyclebin"
-            icon={template}
+            icon={recyclebinempty48}
             className="text-windows-white capitalize tracking-tight"
           />
         </div>
-        <div className="bg-windows-gray-200 px-2 sm:px-12  border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+        <div className="bg-windows-gray-200 px-2 sm:px-10  border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
           <p className="tracking-tight text-center text-sm">Mail</p>
         </div>
-        <div className="bg-windows-gray-200 px-2 sm:px-12 border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+        <div className="bg-windows-gray-200 px-2 sm:px-10 border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
           <p className="tracking-tight text-center text-sm ">Other</p>
         </div>
       </div>
