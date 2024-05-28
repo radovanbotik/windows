@@ -6,7 +6,9 @@ import useTime from "../hooks/useTime";
 import { usePathname } from "next/navigation";
 import { icons } from "./Layout";
 import MenuDropdown from "./MenuDropdown";
-import shutdown48 from "../../public/icons/shutdown48.png";
+import monitorwindows32 from "../../public/icons/monitorwindows32.png";
+import monitorblue32 from "../../public/icons/monitorblue32.png";
+import monitorblack32 from "../../public/icons/monitorblack32.png";
 import { useGlobalContext } from "../context";
 
 export default function Taskbar() {
@@ -20,12 +22,16 @@ export default function Taskbar() {
     <div className="bg-windows-gray-200 border-t-2 border-t-windows-white ">
       <div className="flex px-1 h-8 items-center">
         <MenuDropdown menuButton={{ title: "start" }} variant="start">
-          <Button className="px-2 py-1 text-sm flex gap-2 items-center select-none" onClick={() => setXPTheme()}>
-            <Image src={shutdown48} alt="shutdown system" width={48} height={48} />
+          <Button className="px-2 py-1 text-sm flex gap-2 items-center " onClick={() => setXPTheme()}>
+            <Image src={monitorblack32} alt="shutdown system" width={32} height={32} />
+            <span>Sleep</span>
+          </Button>
+          <Button className="px-2 py-1 text-sm flex gap-2 items-center " onClick={() => setXPTheme()}>
+            <Image src={monitorblue32} alt="shutdown system" width={32} height={32} />
             <span>{xpTheme ? "Classic Theme" : "XP Theme"}</span>
           </Button>
-          <Button className="px-2 py-1 text-sm flex gap-2 items-center select-none">
-            <Image src={shutdown48} alt="shutdown system" width={48} height={48} />
+          <Button className="px-2 py-1 text-sm flex gap-2 items-center ">
+            <Image src={monitorwindows32} alt="shutdown system" width={32} height={32} />
             <span>Shutdown</span>
           </Button>
         </MenuDropdown>

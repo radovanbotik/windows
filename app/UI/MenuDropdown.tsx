@@ -25,7 +25,7 @@ const StartButton = forwardRef<ElementRef<"button">, { children: ReactNode }>(fu
   return (
     <button
       ref={ref}
-      className="flex items-center gap-1 text-black text-md px-1  bg-[#C0C0C0] border-2 border-t-[#FFFFFF] border-r-[#808080] border-b-[#808080] border-l-[#FFFFFF] "
+      className="flex items-center gap-1 text-black text-md px-1  bg-[#C0C0C0] border-2 border-t-[#FFFFFF] border-r-[#808080] border-b-[#808080] border-l-[#FFFFFF] shadow-[1px_1px_0px_1px_rgba(0,0,0,1),inset_1px_1px_0px_1px_#cdcccc]"
       {...props}
     >
       {children}
@@ -69,7 +69,7 @@ export default function MenuDropdown({ menuButton, children, className, variant 
                 </p>
               </div>
 
-              <div className="flex-auto">
+              <div className="flex-auto self-end">
                 {children.map((child: ReactNode, i: number) => (
                   <Menu.Item
                     key={i}
