@@ -117,7 +117,7 @@ function Tree() {
 
 function Navbar() {
   return (
-    <div className="flex border-2 border-t-windows-white border-l-windows-white border-b-windows-gray-400 border-r-windows-gray-400">
+    <div className="flex border-2 border-r-0 border-t-windows-white border-l-windows-white border-b-windows-gray-400">
       {actions.map(action => (
         <button key={action.name} className="leading-none text-sm py-1 px-2 tracking-tight">
           {action.name}
@@ -214,7 +214,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Window.Header>Inbox</Window.Header>
       <Window.Toolbar className="px-0 py-0">
         <Navbar />
-        <Quicklinks />
+        {/* <Quicklinks /> */}
       </Window.Toolbar>
       <Window.Body
         variant="window"
