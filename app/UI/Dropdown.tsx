@@ -22,21 +22,21 @@ const items = [
     icon: help48,
     href: "/help",
   },
-  {
-    name: "Find",
-    icon: searchfile48,
-    href: "/find",
-  },
-  {
-    name: "Settings",
-    icon: settings48,
-    href: "/settings",
-  },
-  {
-    name: "Documents",
-    icon: directoryopen48,
-    href: "documents",
-  },
+  // {
+  //   name: "Find",
+  //   icon: searchfile48,
+  //   href: "/find",
+  // },
+  // {
+  //   name: "Settings",
+  //   icon: settings48,
+  //   href: "/settings",
+  // },
+  // {
+  //   name: "Documents",
+  //   icon: directoryopen48,
+  //   href: "documents",
+  // },
 ];
 
 function MenuItem({ name, icon, href }: { name: string; icon: StaticImageData; href: string }) {
@@ -44,10 +44,10 @@ function MenuItem({ name, icon, href }: { name: string; icon: StaticImageData; h
     <Menu.Item>
       {({ active }) => (
         <Link
-          href={href}
+          href="#"
           className={clsx(
             active ? "bg-windows-blue text-windows-white" : "text-gray-700",
-            "px-2 py-1 text-sm flex gap-2 items-center "
+            "px-2 py-1 text-sm flex gap-2 items-center select-none"
           )}
         >
           <Image src={icon} alt="shutdown system" width={48} height={48} />

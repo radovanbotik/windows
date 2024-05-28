@@ -193,7 +193,7 @@ function Body({ children }: { children: ReactNode }) {
       </div>
       <div className="flex-auto w-full h-full flex flex-col gap-2">
         <h3 className={`bg-windows-gray-400 text-white text-4xl px-1 py-3 ${ebGaramond.className} tracking-tight`}>
-          Contacts
+          Mail Inbox
         </h3>
         <div className="flex-auto flex flex-col sm:flex-row gap-2">
           <div className="overscroll-x-contain bg-windows-white p-1 px-4 border-2 border-t-black border-l-black border-r-windows-white border-b-windows-white shrink-0">
