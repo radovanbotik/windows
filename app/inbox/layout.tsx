@@ -155,7 +155,7 @@ function Body({ children }: { children: ReactNode }) {
             className="text-windows-white capitalize tracking-tight"
           />
           <Icon
-            name="Contacs"
+            name="Contacts"
             href="/inbox/contacts"
             icon={template}
             className="text-windows-white capitalize tracking-tight"
@@ -205,7 +205,7 @@ function Body({ children }: { children: ReactNode }) {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <Window className="w-full h-[calc(100vh-34px)] p-0">
+    <Window className="w-full h-[calc(100vh-34px)]">
       <Window.Header>Inbox</Window.Header>
       <Window.Toolbar className="px-0 py-0">
         <Navbar />

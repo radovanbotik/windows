@@ -16,7 +16,7 @@ export function Window<T extends ElementType = "div">({
     <Component
       className={clsx(
         className,
-        "relative  flex flex-col p-1 bg-windows-gray-200 border-windows-gray-400 border-r-windows-gray-400 border-r-2 border-b-2"
+        "relative  flex flex-col bg-windows-gray-200 border-windows-gray-400 border-r-windows-gray-400 border-r-2 border-b-2"
       )}
     >
       {children}
@@ -28,7 +28,7 @@ Window.Header = function WindowHeader({ children, className }: ComponentPropsWit
   return (
     <div className={clsx(className, "bg-windows-blue text-windows-white px-2 ")}>
       <div className="flex items-center">
-        <span className="mr-auto">{children}</span>
+        <span className="mr-auto indent-2">{children}</span>
         <Button variant="windows" className="w-4 h-4">
           ?
         </Button>
