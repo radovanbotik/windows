@@ -118,7 +118,7 @@ export default function page() {
   return (
     <Window className="w-full h-[calc(100vh-34px)]">
       <Window.Header>Pictures</Window.Header>
-      <Window.Toolbar className="flex space-x-4">
+      <Window.Toolbar className="flex space-x-4 px-4">
         <Toolbar handleSelect={handleSelectView} />
       </Window.Toolbar>
       <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]">

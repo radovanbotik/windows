@@ -40,7 +40,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-wrap justify-between w-full h-full">
-      <ul className="flex flex-col  h-full">
+      <ul className="flex flex-col gap-2 h-full">
         {tracks.map((item, i: number) => (
           <li
             key={item.track.id}
@@ -74,7 +74,7 @@ export default function Page() {
             </div>
             <div>
               <h4 className="text-sm font-bold">{item.track.name}</h4>
-              <p className="mt-1 text-xs">{item.track.artists.map(artist => artist.name).join(",")}</p>
+              <p className="mt-0 text-xs">{item.track.artists.map(artist => artist.name).join(",")}</p>
             </div>
           </li>
         ))}
