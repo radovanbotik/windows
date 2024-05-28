@@ -1,21 +1,21 @@
 "use client";
 import { ReactNode, createContext, useContext, useReducer } from "react";
 
-type ActionTypes = { type: "set-theme"; payload: "classic" | "xp" };
+type ActionTypes = { type: "set-theme" };
 
 type StateProps = {
-  theme: "classic" | "xp";
+  xpTheme: boolean;
 };
-type ContextProps = StateProps & { setClassicTheme: () => void; setXPTheme: () => void };
+type ContextProps = StateProps & { setXPTheme: () => void };
 
 const GlobalContext = createContext<null | ContextProps>(null);
 const initialState: StateProps = {
-  theme: "classic",
+  xpTheme: false,
 };
 
 function reducer(state: StateProps, action: ActionTypes) {
   if (action.type === "set-theme") {
-    return { ...state, theme: action.payload };
+    return { ...state, xpTheme: !state.xpTheme };
   }
   return state;
 }
@@ -23,14 +23,11 @@ function reducer(state: StateProps, action: ActionTypes) {
 export function Context({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function setClassicTheme() {
-    dispatch({ type: "set-theme", payload: "classic" });
-  }
   function setXPTheme() {
-    dispatch({ type: "set-theme", payload: "xp" });
+    dispatch({ type: "set-theme" });
   }
 
-  return <GlobalContext.Provider value={{ ...state, setClassicTheme, setXPTheme }}>{children}</GlobalContext.Provider>;
+  return <GlobalContext.Provider value={{ ...state, setXPTheme }}>{children}</GlobalContext.Provider>;
 }
 
 export function useGlobalContext() {

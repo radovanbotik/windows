@@ -1,3 +1,4 @@
+"use client";
 import { ComponentPropsWithoutRef, ReactNode } from "react";
 import Taskbar from "./Taskbar";
 import computer from "../../public/icons/computer48.png";
@@ -10,6 +11,7 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import windowsxp from "../../public/background/windowsxp.jpg";
 import Icon from "./Icon";
+import { useGlobalContext } from "../context";
 
 export const icons = [
   {
@@ -45,10 +47,11 @@ export const icons = [
 ];
 
 export default function Layout({ children }: { children: ReactNode }) {
+  const { xpTheme } = useGlobalContext();
   return (
     <>
       <div className="fixed inset-0 bg-windows-green-light">
-        {/* <Image src={windowsxp} alt="" fill aria-hidden="true" className="object-cover w-full h-full" /> */}
+        {xpTheme && <Image src={windowsxp} alt="" fill aria-hidden="true" className="object-cover w-full h-full" />}
       </div>
       <div className="relative flex flex-col w-full">
         <div className="flex-auto relative">
