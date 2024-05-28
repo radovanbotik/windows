@@ -16,7 +16,7 @@ export function Window<T extends ElementType = "div">({
     <Component
       className={clsx(
         className,
-        "relative  flex flex-col p-1 bg-windows-gray-200 border-windows-gray-400 border-r-windows-gray-400 border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"
+        "relative  flex flex-col p-1 bg-windows-gray-200 border-windows-gray-400 border-r-windows-gray-400 border-r-2 border-b-2"
       )}
     >
       {children}
@@ -65,5 +65,5 @@ Window.Body = function WindowBody({
 };
 
 Window.Footer = function WindowFooter({ children, className }: ComponentPropsWithoutRef<"div">) {
-  return <div className={clsx(className, "px-2 py-0")}>{children}</div>;
+  return <div className={clsx(className, "px-2 py-1")}>{children}</div>;
 };

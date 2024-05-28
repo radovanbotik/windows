@@ -137,11 +137,11 @@ function Quicklinks() {
 function Body({ children }: { children: ReactNode }) {
   return (
     <div className={`flex flex-col p-2 sm:flex-row bg-windows-gray-200 gap-1`}>
-      <div className="h-full bg-windows-gray-400 flex flex-col border-2 border-t-black border-l-black border-r-windows-white border-b-windows-white">
+      <div className="bg-windows-gray-400 flex flex-col border-2 border-t-black border-l-black border-r-windows-white border-b-windows-white">
         <div className="bg-windows-gray-200  px-2 sm:px-12 border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
           <p className="tracking-tight text-center text-sm ">Outlook</p>
         </div>
-        <div className="flex-auto py-2 px-2 sm:py-6 flex flex-row sm:flex-col flex-wrap gap-12 items-start sm:items-center">
+        <div className="py-2 px-2 sm:py-6 flex flex-row sm:flex-col flex-wrap gap-6 sm:gap-12 items-start sm:items-center mb-auto">
           <Icon
             name="Inbox (50)"
             href="/inbox"
@@ -186,7 +186,7 @@ function Body({ children }: { children: ReactNode }) {
           <p className="tracking-tight text-center text-sm ">Other</p>
         </div>
       </div>
-      <div className="w-full h-full flex flex-col gap-2">
+      <div className="flex-auto w-full h-full flex flex-col gap-2">
         <h3 className={`bg-windows-gray-400 text-white text-4xl px-1 py-3 ${ebGaramond.className} tracking-tight`}>
           Contacts
         </h3>
@@ -218,8 +218,8 @@ export default function Layout({ children }: { children: ReactNode }) {
         <Body>{children}</Body>
       </Window.Body>
       <Window.Footer className="flex gap-1">
-        <div className="w-2/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
-        <div className="w-1/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
+        <div className="w-2/3 h-5  bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
+        <div className="w-1/3 h-5  bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
       </Window.Footer>
     </Window>
   );
