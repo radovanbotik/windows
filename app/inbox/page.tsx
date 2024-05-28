@@ -6,19 +6,6 @@ import { getReceivedEmails, getSentEmails, getDeletedEmails } from "../lib/inbox
 import Button from "../UI/Button";
 import Row from "./common/Row";
 
-// type EmailProps = {
-//   createdAt: string;
-//   id: number;
-//   from: string;
-//   to: string;
-//   subject: string;
-//   body: string;
-//   important: boolean;
-//   opened: boolean;
-//   attachment: boolean;
-//   authorId: number | null;
-//   deleted: boolean;
-// };
 type InboxProps = Prisma.PromiseReturnType<typeof getReceivedEmails>;
 type PageProps = {
   params: { id: string };
@@ -42,14 +29,6 @@ export default async function Page({ params, searchParams }: PageProps) {
         <div className="p-2 bg-windows-blue">
           <h3 className="text-4xl font-bold indent-12 text-white">Express</h3>
         </div>
-        {/* <div className="p-2 bg-windows-gray-900">
-          <div className="grid grid-cols-2">
-            <div></div>
-            <div>
-              <h4 className="text-white font-bold underline">Find a message:</h4>
-            </div>
-          </div>
-        </div> */}
       </div>
     );
   return (

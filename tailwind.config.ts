@@ -22,8 +22,9 @@ const config: Config = {
         },
         "windows-gray": {
           100: "#FEFEFE",
-          200: "#C1C1C1",
+          200: "#C0C0C0",
           300: "#D9D9D9",
+          400: "#808080",
           900: "#343434",
         },
         "windows-green": {

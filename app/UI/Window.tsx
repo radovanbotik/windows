@@ -71,5 +71,5 @@ Window.Body = function WindowBody({
 };
 
 Window.Footer = function WindowFooter({ children, className }: ComponentPropsWithoutRef<"div">) {
-  return <div className={clsx(className, "p-2")}>{children}</div>;
+  return <div className={clsx(className, "px-2 py-0")}>{children}</div>;
 };

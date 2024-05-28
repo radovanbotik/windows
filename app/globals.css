@@ -26,6 +26,23 @@ body {
     text-wrap: balance;
   }
 
+  .border-out {
+    border: 2px;
+    border-top: #ffffff;
+    border-right: #808080;
+    border-bottom: #808080;
+    border-left: #ffffff;
+    box-shadow: 1px 1px 0px 0px #0000007f;
+  }
+  .border-in {
+    border: 2px;
+    border-top: #ffffff;
+    border-right: #808080;
+    border-bottom: #808080;
+    border-left: #ffffff;
+    box-shadow: 1px 1px 0px 0px #0000007f;
+  }
+
   @keyframes animatecolor {
     0% {
       --color1: rgb(100, 200, 255);

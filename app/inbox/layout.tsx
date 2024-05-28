@@ -12,6 +12,14 @@ import envelopeclosed from "../../public/icons/envelopeclosed16.png";
 import template from "../../public/icons/template16.png";
 import Link from "next/link";
 import { ReactNode } from "react";
+import { EB_Garamond } from "next/font/google";
+import Icon from "../UI/Icon";
+
+const ebGaramond = EB_Garamond({
+  weight: ["400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+});
 
 const actions = [
   {
@@ -71,23 +79,17 @@ const outlook = [
 
 function Tree() {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2 text-sm">
       {outlook.map(parent => (
         <div className="flex">
-          <div className="mr-2 sm:mr-4 flex-shrink-0">
-            <Image
-              src={parent.icon}
-              alt="parent name"
-              width={16}
-              height={16}
-              className="h-4 w-4 border border-gray-300 bg-white text-gray-300"
-            />
+          <div className="mr-2 sm:mr-2 flex-shrink-0">
+            <Image src={parent.icon} alt="parent name" width={16} height={16} className="h-4 w-4 " />
           </div>
           <div>
-            <h4 className=" font-bold">{parent.name}</h4>
+            <h4 className="text-nowrap">{parent.name}</h4>
             {parent.actions.map(action => (
               <Link href={action.href} className="mt-2 flex">
-                <div className="mr-2 sm:mr-4 flex-shrink-0">
+                <div className="mr-2 sm:mr-2 flex-shrink-0">
                   <Image
                     src={action.icon}
                     alt={action.name}
@@ -97,7 +99,7 @@ function Tree() {
                   />
                 </div>
                 <div>
-                  <h4 className="">{action.name}</h4>
+                  <h4 className="text-nowrap">{action.name}</h4>
                 </div>
               </Link>
             ))}
@@ -134,11 +136,37 @@ function Quicklinks() {
 
 function Body({ children }: { children: ReactNode }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-windows-gray">
-      <div className="bg-windows-white px-1 py-4 sm:p-4">
-        <Tree />
+    <div className={`flex flex-col sm:flex-row bg-windows-gray-200 gap-1`}>
+      <div className="h-full bg-windows-gray-400 flex flex-col border-2 border-t-black border-l-black border-r-windows-white border-b-windows-white">
+        <div className="bg-windows-gray-200 px-2 sm:px-12 text-sm border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+          Outlook
+        </div>
+        <div className="flex-auto py-6 flex flex-col gap-12">
+          <Icon name="Inbox (50)" href="/inbox" icon={template} className="text-windows-white capitalize" />
+          <Icon name="Calendar" href="/inbox/calendar" icon={template} className="text-windows-white capitalize" />
+          <Icon name="Contacs" href="/inbox/contacts" icon={template} className="text-windows-white capitalize" />
+          <Icon name="Tasks" href="/inbox/tasks" icon={template} className="text-windows-white capitalize" />
+          <Icon name="Notes" href="/inbox/notes" icon={template} className="text-windows-white capitalize" />
+          <Icon name="Recycle Bin" href="/inbox/recyclebin" icon={template} className="text-windows-white capitalize" />
+        </div>
+        <div className="bg-windows-gray-200 px-2 sm:px-12 text-sm border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+          Mail
+        </div>
+        <div className="bg-windows-gray-200 px-2 sm:px-12 text-sm border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+          Other
+        </div>
       </div>
-      <div className="flex flex-col bg-windows-white h-full w-full">{children}</div>
+      <div className="w-full h-full flex flex-col gap-2">
+        <h3 className={`bg-windows-gray-400 text-white text-4xl px-1 py-3 ${ebGaramond.className}`}>Contacts</h3>
+        <div className="flex-auto flex flex-col sm:flex-row gap-2">
+          <div className="overscroll-x-contain bg-windows-white p-1 px-4 border-2 border-t-black border-l-black border-r-windows-white border-b-windows-white shrink-0">
+            <Tree />
+          </div>
+          <div className="flex flex-col bg-windows-white h-full w-full border-2 border-t-black border-l-black border-r-windows-white border-b-windows-white">
+            {children}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
