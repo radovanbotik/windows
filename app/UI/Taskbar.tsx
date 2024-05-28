@@ -12,7 +12,7 @@ export default function Taskbar() {
   const time = useTime();
   let icon = icons.find(icon => icon.href === pathname.slice(1, pathname.length));
   return (
-    <div className="bg-windows-gray border-t-2 border-t-windows-white ">
+    <div className="bg-windows-gray-200 border-t-2 border-t-windows-white ">
       <div className="flex px-1 h-8 items-center">
         <Dropdown className="mr-2" />
         {icon && (

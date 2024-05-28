@@ -16,7 +16,7 @@ export function Window<T extends ElementType = "div">({
     <Component
       className={clsx(
         className,
-        "relative  flex flex-col p-1 bg-windows-gray border-b-black border-r-black border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"
+        "relative  flex flex-col p-1 bg-windows-gray-200 border-windows-gray-400 border-r-windows-gray-400 border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"
       )}
     >
       {children}
@@ -43,7 +43,7 @@ Window.Header = function WindowHeader({ children, className }: ComponentPropsWit
   );
 };
 Window.Toolbar = function WindowHeader({ children, className }: ComponentPropsWithoutRef<"div">) {
-  return <div className={clsx(className, "px-2 py-1")}>{children}</div>;
+  return <div className={clsx("px-2 py-1", className)}>{children}</div>;
 };
 
 const bodyVariants = {
@@ -56,13 +56,7 @@ Window.Body = function WindowBody({
   variant,
 }: ComponentPropsWithoutRef<"div"> & { variant?: keyof typeof bodyVariants }) {
   return (
-    <div
-      className={clsx(
-        className,
-        "flex-auto  overflow-y-auto bg-windows-white mx-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]",
-        variant && bodyVariants[variant]
-      )}
-    >
+    <div className={clsx(className, "flex-auto  overflow-y-auto ", variant && bodyVariants[variant])}>
       {children}
       {/* <div className="grid">{children}</div> */}
       {/* <div className="grid grid-cols-4 grid-rows-4 grid-flow-col gap-4">{children}</div> */}

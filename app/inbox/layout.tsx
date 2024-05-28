@@ -68,9 +68,9 @@ const outlook = [
     icon: outlookexpress,
     href: "/inbox",
     actions: [
-      { name: "Inbox", href: "/inbox?emails=received", icon: write },
-      { name: "Sent Items", href: "/inbox?emails=sent", icon: directorycabinet },
-      { name: "Deleted Items", href: "/inbox?emails=deleted", icon: recyclebinempty },
+      { name: "Inbox", href: "/inbox/inbox?emails=received", icon: write },
+      { name: "Sent Items", href: "/inbox/inbox?emails=sent", icon: directorycabinet },
+      { name: "Deleted Items", href: "/inbox/inbox?emails=deleted", icon: recyclebinempty },
       { name: "Contacts", href: "/inbox/contacts", icon: address },
     ],
   },
@@ -79,7 +79,7 @@ const outlook = [
 
 function Tree() {
   return (
-    <div className="flex flex-col gap-2 text-sm">
+    <div className="flex flex-col gap-2 text-sm tracking-tight">
       {outlook.map(parent => (
         <div className="flex">
           <div className="mr-2 sm:mr-2 flex-shrink-0">
@@ -112,9 +112,9 @@ function Tree() {
 
 function Navbar() {
   return (
-    <div className="flex gap-4 p-1 border-b-2 border-b-stone-500">
+    <div className="flex border-2 border-t-windows-white border-l-windows-white border-b-windows-gray-400 border-r-windows-gray-400">
       {actions.map(action => (
-        <button key={action.name} className="leading-none">
+        <button key={action.name} className="leading-none text-sm py-1 px-2 tracking-tight">
           {action.name}
         </button>
       ))}
@@ -124,9 +124,9 @@ function Navbar() {
 
 function Quicklinks() {
   return (
-    <div className="flex p-1 border-b-2 border-b-stone-500">
+    <div className="flex gap-4 px-2 border-2 border-t-windows-white border-l-windows-white border-b-windows-gray-400 border-r-windows-gray-400">
       {quicklinks.map(link => (
-        <Button key={link.name} variant="windows" className="h-8 w-8 flex flex-col">
+        <Button key={link.name} className="h-6 w-6 grid place-content-center">
           <Image src={link.icon} alt={link.name} width={16} height={16} />
         </Button>
       ))}
@@ -136,28 +136,60 @@ function Quicklinks() {
 
 function Body({ children }: { children: ReactNode }) {
   return (
-    <div className={`flex flex-col sm:flex-row bg-windows-gray-200 gap-1`}>
+    <div className={`flex flex-col p-2 sm:flex-row bg-windows-gray-200 gap-1`}>
       <div className="h-full bg-windows-gray-400 flex flex-col border-2 border-t-black border-l-black border-r-windows-white border-b-windows-white">
-        <div className="bg-windows-gray-200 px-2 sm:px-12 text-sm border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
-          Outlook
+        <div className="bg-windows-gray-200  px-2 sm:px-12 border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+          <p className="tracking-tight text-center text-sm ">Outlook</p>
         </div>
-        <div className="flex-auto py-6 flex flex-col gap-12">
-          <Icon name="Inbox (50)" href="/inbox" icon={template} className="text-windows-white capitalize" />
-          <Icon name="Calendar" href="/inbox/calendar" icon={template} className="text-windows-white capitalize" />
-          <Icon name="Contacs" href="/inbox/contacts" icon={template} className="text-windows-white capitalize" />
-          <Icon name="Tasks" href="/inbox/tasks" icon={template} className="text-windows-white capitalize" />
-          <Icon name="Notes" href="/inbox/notes" icon={template} className="text-windows-white capitalize" />
-          <Icon name="Recycle Bin" href="/inbox/recyclebin" icon={template} className="text-windows-white capitalize" />
+        <div className="flex-auto py-2 px-2 sm:py-6 flex flex-row sm:flex-col flex-wrap gap-12 items-start sm:items-center">
+          <Icon
+            name="Inbox (50)"
+            href="/inbox"
+            icon={template}
+            className="text-windows-white capitalize tracking-tight"
+          />
+          <Icon
+            name="Calendar"
+            href="/inbox/calendar"
+            icon={template}
+            className="text-windows-white capitalize tracking-tight"
+          />
+          <Icon
+            name="Contacs"
+            href="/inbox/contacts"
+            icon={template}
+            className="text-windows-white capitalize tracking-tight"
+          />
+          <Icon
+            name="Tasks"
+            href="/inbox/tasks"
+            icon={template}
+            className="text-windows-white capitalize tracking-tight"
+          />
+          <Icon
+            name="Notes"
+            href="/inbox/notes"
+            icon={template}
+            className="text-windows-white capitalize tracking-tight"
+          />
+          <Icon
+            name="Recycle Bin"
+            href="/inbox/recyclebin"
+            icon={template}
+            className="text-windows-white capitalize tracking-tight"
+          />
         </div>
-        <div className="bg-windows-gray-200 px-2 sm:px-12 text-sm border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
-          Mail
+        <div className="bg-windows-gray-200 px-2 sm:px-12  border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+          <p className="tracking-tight text-center text-sm">Mail</p>
         </div>
-        <div className="bg-windows-gray-200 px-2 sm:px-12 text-sm border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
-          Other
+        <div className="bg-windows-gray-200 px-2 sm:px-12 border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+          <p className="tracking-tight text-center text-sm ">Other</p>
         </div>
       </div>
       <div className="w-full h-full flex flex-col gap-2">
-        <h3 className={`bg-windows-gray-400 text-white text-4xl px-1 py-3 ${ebGaramond.className}`}>Contacts</h3>
+        <h3 className={`bg-windows-gray-400 text-white text-4xl px-1 py-3 ${ebGaramond.className} tracking-tight`}>
+          Contacts
+        </h3>
         <div className="flex-auto flex flex-col sm:flex-row gap-2">
           <div className="overscroll-x-contain bg-windows-white p-1 px-4 border-2 border-t-black border-l-black border-r-windows-white border-b-windows-white shrink-0">
             <Tree />
@@ -173,9 +205,9 @@ function Body({ children }: { children: ReactNode }) {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <Window className="w-full h-[calc(100vh-34px)]">
+    <Window className="w-full h-[calc(100vh-34px)] p-0">
       <Window.Header>Inbox</Window.Header>
-      <Window.Toolbar>
+      <Window.Toolbar className="px-0 py-0">
         <Navbar />
         <Quicklinks />
       </Window.Toolbar>

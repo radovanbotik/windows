@@ -1,4 +1,5 @@
 import { getEmail } from "@/app/lib/inboxdata";
+import { notFound } from "next/navigation";
 
 type PageProps = {
   params: { id: string };
@@ -7,7 +8,7 @@ type PageProps = {
 
 export default async function Page({ params, searchParams }: PageProps) {
   const email = await getEmail(Number(params.id));
-  console.log(email);
+  if (!email) return notFound();
 
   return (
     <>
