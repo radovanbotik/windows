@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import AudioPlayer from "../UI/AudioPlayer";
-import { getPlaylist } from "../lib/spotify";
+import { getAllPlaylists, getPlaylist } from "../lib/spotify";
 import Image from "next/image";
 import play from "../../public/icons/player/play50.png";
 import clsx from "clsx";
@@ -25,6 +25,8 @@ export default function Page() {
     async function fetch() {
       const playlist = await getPlaylist();
       setTracks(playlist.tracks.items);
+      const all = await getAllPlaylists();
+      console.log(all);
     }
     fetch();
   }, []);
@@ -81,8 +83,8 @@ export default function Page() {
       </ul>
       {currentTrack && (
         <Modal
-          body={<AudioPlayer src={currentTrack.src} />}
-          description={`Playing ${currentTrack.name}`}
+          body={<AudioPlayer src={currentTrack.src} trackName={currentTrack.name} />}
+          // description={`Playing ${currentTrack.name}`}
           title="Media Player v1.0"
           open={isOpen}
           setIsOpen={setIsOpen}

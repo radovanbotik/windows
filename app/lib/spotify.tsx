@@ -25,3 +25,18 @@ export async function getPlaylist() {
   const data = await response.json();
   return data;
 }
+
+export async function getAllPlaylists() {
+  const user = "11161628746";
+  const token = await getToken();
+  const options = {
+    method: "GET",
+    headers: {
+      Authorization: `${token.token_type} ${token.access_token}`,
+    },
+  };
+  const response = await fetch(`https://api.spotify.com/v1/users/${user}/playlists`, options);
+  const data = await response.json();
+  // return data;
+  return data.items.filter((playlist: { owner: { id: string } }) => playlist.owner.id === user);
+}

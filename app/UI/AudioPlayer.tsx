@@ -31,7 +31,15 @@ function ButtonControl({ icon, className, ...props }: ComponentPropsWithoutRef<"
   );
 }
 
-export default function AudioPlayer({ src, className }: { src: string | null; className?: string }) {
+export default function AudioPlayer({
+  src,
+  trackName,
+  className,
+}: {
+  src: string | null;
+  trackName: string;
+  className?: string;
+}) {
   const audio = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -113,7 +121,14 @@ export default function AudioPlayer({ src, className }: { src: string | null; cl
       <audio ref={audio} src={src} className="hidden"></audio>
       <div className={clsx(`p-1  flex flex-col gap-1 bg-windows-gray-300 `, className)}>
         <div className="h-96 border-2 bg-black border-[#808080]  ">
-          {isPlaying && <div className="w-full h-full gradient-animation"></div>}
+          {isPlaying && (
+            <div className="w-full h-full gradient-animation">
+              <div className="p-2">
+                <p className="text-windows-white">Playing:</p>
+                <h1 className="text-windows-white text-2xl">{trackName}</h1>
+              </div>
+            </div>
+          )}
         </div>
         {/* <input
           type="range"
