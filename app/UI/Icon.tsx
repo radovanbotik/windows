@@ -14,20 +14,19 @@ const iconSizeStyles = {
 export default function Icon({
   name,
   icon,
-  href,
   className,
   iconSize = "normal",
   showText = true,
-}: ComponentPropsWithoutRef<typeof Link> & {
+  ...props
+}: ComponentPropsWithoutRef<typeof Link | "button"> & {
   name: string;
   icon: StaticImageData;
-  href: string;
   className?: string;
   iconSize?: IconSizes;
   showText?: boolean;
 }) {
   return (
-    <Button href={href} className={clsx(className, "flex flex-col  justify-center items-center text-center")}>
+    <Button className={clsx(className, "flex flex-col  justify-center items-center text-center")} {...props}>
       <div className={clsx(iconSizeStyles[iconSize], "flex place-content-center p-1")}>
         <Image src={icon} alt={name} width={48} height={48} />
       </div>

@@ -7,11 +7,22 @@ import rado from "../../public/pictures/rado.jpg";
 import szeged from "../../public/pictures/szeged.jpg";
 import vienna from "../../public/pictures/vienna.jpg";
 import Image, { StaticImageData } from "next/image";
-import { ComponentPropsWithoutRef, useState } from "react";
+import React, { ComponentPropsWithoutRef, useRef, useState } from "react";
 import clsx from "clsx";
 import Modal from "../UI/Modal";
 import MenuDropdown from "../UI/MenuDropdown";
 import Button from "../UI/Button";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/effect-fade";
+import { Navigation, Autoplay, EffectFade } from "swiper/modules";
+import { Swiper as SwiperType } from "swiper/types";
+import Icon from "../UI/Icon";
+import prev50 from "../../public/icons/player/prev50.png";
+import next50 from "../../public/icons/player/next50.png";
+import play50 from "../../public/icons/player/play50.png";
+import Divider from "../UI/Divider";
 
 const pictures = [
   {
@@ -99,7 +110,56 @@ function Toolbar({ handleSelect }: { handleSelect: (arg: "tiles" | "list" | "ext
   );
 }
 
+function Slider({ images, currentSlide }: { images: StaticImageData[]; currentSlide: number }) {
+  const swiperRef = useRef<SwiperType | null>(null);
+  const prev = useRef<HTMLDivElement | null>(null);
+  const next = useRef<HTMLDivElement | null>(null);
+
+  return (
+    <div className="flex-col gap-2">
+      <Swiper
+        className="max-w-xs sm:max-w-md"
+        // navigation={true}
+        modules={[Navigation, Autoplay]}
+        initialSlide={currentSlide}
+        onBeforeInit={swiper => {
+          swiperRef.current = swiper;
+        }}
+        // autoplay={{
+        //   delay: 2000,
+        // }}
+      >
+        {images.map((image, i) => (
+          <SwiperSlide key={i}>
+            <Image src={image} alt={"image"} height={640} width={480} className="object-cover block" />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <div className="flex gap-2">
+        <div onClick={() => swiperRef.current?.slidePrev()} ref={prev}>
+          <Icon showText={false} icon={prev50} name="previous" />
+        </div>
+        <div onClick={() => swiperRef.current?.slideNext()} ref={next}>
+          <Icon showText={false} icon={next50} name="next" />
+        </div>
+        <div className="ml-auto">
+          <div
+            onClick={() =>
+              swiperRef.current?.autoplay.running
+                ? swiperRef.current?.autoplay.stop()
+                : swiperRef.current?.autoplay.start()
+            }
+          >
+            <Icon showText={false} icon={play50} name="previous" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function page() {
+  const images = [market, krakow, mafi2, rado, szeged, vienna];
   const [selectedImage, setSelectedImage] = useState<{ name: string; src: StaticImageData } | null>(null);
   const [view, setView] = useState<"tiles" | "list" | "extraLarge">("extraLarge");
   const [isOpen, setIsOpen] = useState(false);
@@ -143,10 +203,12 @@ export default function page() {
       </Window.Footer>
       {selectedImage && (
         <Modal
-          title={`Preview of ${selectedImage.name}`}
+          title={`Preview of ${"image"}`}
           body={
-            <Image src={selectedImage.src} alt={selectedImage.name} height={640} width={480} className="object-cover" />
+            // <Image src={selectedImage.src} alt={selectedImage.name} height={640} width={480} className="object-cover" />
+            <Slider images={images} currentSlide={images.indexOf(selectedImage.src)} />
           }
+          backdrop={true}
           open={isOpen}
           setIsOpen={setIsOpen}
         />
