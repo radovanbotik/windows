@@ -12,16 +12,15 @@ export async function getToken() {
   return token;
 }
 
-export async function getPlaylist() {
+export async function getPlaylist(id: string) {
   const token = await getToken();
-  console.log(token);
   const options = {
     method: "GET",
     headers: {
       Authorization: `${token.token_type} ${token.access_token}`,
     },
   };
-  const response = await fetch("https://api.spotify.com/v1/playlists/0GwwznVymh8I8Rtvsl8bfQ", options);
+  const response = await fetch(`https://api.spotify.com/v1/playlists/${id}`, options);
   const data = await response.json();
   return data;
 }

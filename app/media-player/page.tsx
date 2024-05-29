@@ -1,38 +1,44 @@
 "use client";
 import { useEffect, useState } from "react";
-import AudioPlayer from "../UI/AudioPlayer";
 import { getAllPlaylists, getPlaylist } from "../lib/spotify";
 import Image from "next/image";
-import play from "../../public/icons/player/play50.png";
-import clsx from "clsx";
-import Modal from "../UI/Modal";
-import loader from "../../public/gifs/loader.gif";
 
-type SpotifyPlaylist = {
+import loader from "../../public/gifs/loader.gif";
+import Button from "../UI/Button";
+
+type Playlist = {
+  collaborative: boolean;
+  description: string;
+  href: string;
   id: string;
-  preview_url: string;
+  images: { height: number; url: string; width: number }[];
   name: string;
-  artists: { name: string }[];
-  album: { images: { url: string; height: number; width: number }[] };
+  owner: {
+    display_name: string;
+    href: string;
+    id: string;
+    type: string;
+  };
+  tracks: { href: string; total: number };
 };
 
 export default function Page() {
-  const [tracks, setTracks] = useState<{ track: SpotifyPlaylist }[] | null>(null);
-  const [currentTrack, setCurrentTrack] = useState<{ name: string; src: string } | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [playlists, setPlaylists] = useState<Playlist[] | null>(null);
 
   useEffect(() => {
     async function fetch() {
-      const playlist = await getPlaylist();
-      setTracks(playlist.tracks.items);
       const all = await getAllPlaylists();
-      console.log(all);
+      if (all) {
+        return setPlaylists(all);
+      } else {
+        throw new Error("failed to fetch");
+      }
     }
     fetch();
   }, []);
 
-  console.log(tracks);
-  if (!tracks)
+  console.log(playlists);
+  if (!playlists)
     return (
       <div className="grid place-content-center w-full h-full">
         <Image src={loader} alt="a" />
@@ -42,54 +48,23 @@ export default function Page() {
 
   return (
     <div className="w-full h-full">
-      <ul className="flex flex-col gap-2 h-full overflow-y-auto">
-        {tracks.map((item, i: number) => (
-          <li
-            key={item.track.id}
-            className={clsx(`flex flex-wrap group cursor-pointer`, !item.track.preview_url && "cursor-not-allowed")}
-            onClick={() => {
-              if (item.track.preview_url) {
-                setCurrentTrack({ name: item.track.name, src: item.track.preview_url });
-                setIsOpen(true);
-              }
-              return;
-            }}
-          >
-            <div className="mb-4 sm:mb-0 sm:mr-4 w-8 h-8 relative">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4">
+        {playlists.map(playlist => (
+          <li key={playlist.id} className="grid place-content-center">
+            <Button href={`/media-player/playlist/${playlist.id}`} className="space-y-2">
               <Image
-                src={item.track.album.images[0].url}
-                alt={item.track.id}
-                width={item.track.album.images[0].width}
-                height={item.track.album.images[0].height}
-                className="border border-gray-300 bg-white text-gray-300"
+                src={playlist.images[1].url}
+                alt={playlist.name}
+                height={playlist.images[1].height}
+                width={playlist.images[1].width}
               />
-              <Image
-                src={play}
-                width={50}
-                height={50}
-                alt="play track"
-                className={clsx(
-                  !item.track.preview_url && "hidden cursor-not-allowed",
-                  `absolute inset-0 opacity-0 group-hover:opacity-80`
-                )}
-              />
-            </div>
-            <div>
-              <h4 className="text-sm font-bold">{item.track.name}</h4>
-              <p className="mt-0 text-xs">{item.track.artists.map(artist => artist.name).join(",")}</p>
-            </div>
+              <h4 className="font-bold text-xl text-center">
+                {playlist.name} ({playlist.tracks.total})
+              </h4>
+            </Button>
           </li>
         ))}
       </ul>
-      {currentTrack && (
-        <Modal
-          body={<AudioPlayer src={currentTrack.src} trackName={currentTrack.name} />}
-          // description={`Playing ${currentTrack.name}`}
-          title="Media Player v1.0"
-          open={isOpen}
-          setIsOpen={setIsOpen}
-        />
-      )}
     </div>
   );
 }
