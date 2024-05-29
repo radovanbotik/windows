@@ -81,7 +81,7 @@ const outlook = [
       { name: "Contacts", href: "/inbox/contacts", icon: address },
     ],
   },
-  { name: "New search", icon: outlooktack, href: "#", actions: [] },
+  // { name: "New search", icon: outlooktack, href: "#", actions: [] },
 ];
 
 function Tree() {
