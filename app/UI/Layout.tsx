@@ -59,7 +59,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <div className="fixed inset-0 bg-windows-green-light">
         {xpTheme && <Image src={windowsxp} alt="" fill aria-hidden="true" className="object-cover w-full h-full" />}
       </div>
-      <div className="relative h-full flex flex-col w-full">
+      <div className="relative flex flex-col w-full h-full">
         <div className="relative h-[calc(100%-36px)]">
           <div
             className={clsx(

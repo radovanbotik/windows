@@ -21,8 +21,8 @@ export default function RootLayout({
       className={`${MSSansSerif.className} h-full w-full antialiased tracking-wider`}
       suppressHydrationWarning
     >
-      <body className="h-full flex">
-        <div className="flex w-full h-full relative">
+      <body className="h-full w-full">
+        <div className="w-full h-full relative">
           <Context>
             <Layout>{children}</Layout>
           </Context>
