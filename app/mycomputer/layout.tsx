@@ -13,7 +13,7 @@ export default function layout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <Window className="w-full h-[calc(100vh-36px)]">
+    <Window className="w-full">
       <Window.Header>My Computer</Window.Header>
       <Window.Toolbar>
         <div className="py-1 px-1 flex">
