@@ -15,6 +15,7 @@ import { fontLookup, sizeLookup, sizes, fonts } from "../lib/worddata";
 import { ComponentPropsWithoutRef, ReactNode } from "react";
 import MenuDropdown from "../UI/MenuDropdown";
 import Divider from "../UI/Divider";
+import { Context } from "./context";
 
 const shortcuts = [
   {
@@ -261,21 +262,23 @@ function Document() {
 
 export default function page() {
   return (
-    <Window className="w-full h-full">
-      <Window.Header>CV</Window.Header>
-      <Window.Toolbar>
-        <Navbar />
-        <Divider />
-        {/* <Toolbar /> */}
-        <TextPreferences />
-      </Window.Toolbar>
-      <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]  overflow-hidden">
-        <Document />
-      </Window.Body>
-      <Window.Footer className="flex gap-1">
-        <div className="w-2/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
-        <div className="w-1/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
-      </Window.Footer>
-    </Window>
+    <Context>
+      <Window className="w-full h-full">
+        <Window.Header>CV</Window.Header>
+        <Window.Toolbar>
+          <Navbar />
+          <Divider />
+          {/* <Toolbar /> */}
+          <TextPreferences />
+        </Window.Toolbar>
+        <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]  overflow-hidden">
+          <Document />
+        </Window.Body>
+        <Window.Footer className="flex gap-1">
+          <div className="w-2/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
+          <div className="w-1/3 h-5 mt-1 bg-windows-gray border-b-windows-white border-r-windows-white border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#8E888E]"></div>
+        </Window.Footer>
+      </Window>
+    </Context>
   );
 }
