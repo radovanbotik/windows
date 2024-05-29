@@ -217,10 +217,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <Divider />
         {/* <Quicklinks /> */}
       </Window.Toolbar>
-      <Window.Body
-        // variant="window"
-        className="bg-windows-white  border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]"
-      >
+      <Window.Body className="bg-windows-white  border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]">
         <Body>{children}</Body>
       </Window.Body>
       <Window.Footer className="flex gap-1">
