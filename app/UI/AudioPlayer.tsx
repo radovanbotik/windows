@@ -131,13 +131,13 @@ export default function AudioPlayer({ src, className }: { src: string | null; cl
             <ButtonControl icon={stop} onClick={handleStop} />
             <Divider />
           </div>
-          <div className="flex">
+          {/* <div className="flex">
             <ButtonControl icon={prev} />
             <ButtonControl icon={rewind} />
             <ButtonControl icon={forward} />
             <ButtonControl icon={next} />
             <Divider />
-          </div>
+          </div> */}
           <div className="flex">
             <ButtonControl icon={isMuted || volume === 0 ? loudspeakermuted : loudspeaker} onClick={toggleMute} />
             <input type="range" value={volume} min={0} max={1} step={0.1} onChange={handleVolumeChange} />

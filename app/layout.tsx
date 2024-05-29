@@ -22,7 +22,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="h-full flex">
-        <div className="flex w-full relative">
+        <div className="flex w-full h-full relative">
           <Context>
             <Layout>{children}</Layout>
           </Context>

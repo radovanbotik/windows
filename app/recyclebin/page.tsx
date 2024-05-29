@@ -5,7 +5,7 @@ import Button from "../UI/Button";
 
 export default function page() {
   return (
-    <div className="w-full h-[calc(100vh-36px)]">
+    <div className="w-full h-full">
       <Window className="w-full h-full">
         <Window.Header>Recycle Bin</Window.Header>
         <Window.Toolbar>

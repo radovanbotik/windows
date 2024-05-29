@@ -25,7 +25,7 @@ export default function Taskbar() {
 
   function Pinned() {
     return (
-      <div className="flex gap-2">
+      <div className={"gap-2 hidden sm:flex"}>
         <Icon iconSize="small" icon={desktop16} href={"/"} name="desktop" showText={false} />
         <Icon iconSize="small" icon={msie16} href={"#"} name="internet explorer" showText={false} />
         <Icon iconSize="small" icon={mailbox16} href={"/inbox"} name="mailbox" showText={false} />
@@ -50,9 +50,9 @@ export default function Taskbar() {
             <span>Shutdown</span>
           </Button>
         </MenuDropdown>
-        <Divider orientation="vertical" />
+        {icon && <Divider orientation="vertical" />}
         <Pinned />
-        <Divider orientation="vertical" />
+        <Divider orientation="vertical" className="hidden sm:flex" />
         {icon && (
           <div className="flex-auto">
             <Button variant="systemPushed" className="flex gap-1 items-center w-32">

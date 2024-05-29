@@ -39,8 +39,8 @@ export default function Page() {
     );
 
   return (
-    <div className="flex flex-wrap justify-between w-full h-full">
-      <ul className="flex flex-col gap-2 h-full">
+    <div className="w-full h-full">
+      <ul className="flex flex-col gap-2 h-full overflow-y-auto">
         {tracks.map((item, i: number) => (
           <li
             key={item.track.id}

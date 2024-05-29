@@ -25,7 +25,7 @@ export default function Divider({
     );
   if (orientation === "vertical")
     return (
-      <div className={clsx("relative h-full flex py-1", className)}>
+      <div className={clsx("relative h-full py-1 flex", className)}>
         <div
           className="flex-auto border-2 border-b-stone-500 border-l-2 border-l-stone-500 border-r-windows-white border-t-white"
           aria-hidden="true"

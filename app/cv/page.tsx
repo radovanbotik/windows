@@ -261,7 +261,7 @@ function Document() {
 
 export default function page() {
   return (
-    <Window className="w-full h-[calc(100vh-36px)]">
+    <Window className="w-full h-full">
       <Window.Header>CV</Window.Header>
       <Window.Toolbar>
         <Navbar />
@@ -269,10 +269,7 @@ export default function page() {
         {/* <Toolbar /> */}
         <TextPreferences />
       </Window.Toolbar>
-      <Window.Body
-        variant="window"
-        className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]  overflow-hidden"
-      >
+      <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]  overflow-hidden">
         <Document />
       </Window.Body>
       <Window.Footer className="flex gap-1">
