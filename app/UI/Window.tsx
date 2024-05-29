@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { ComponentPropsWithoutRef, ElementType } from "react";
 import Button from "./Button";
+
 export function Window<T extends ElementType = "div">({
   as,
   className,
@@ -15,7 +16,7 @@ export function Window<T extends ElementType = "div">({
     <Component
       className={clsx(
         className,
-        "relative  flex flex-col bg-windows-gray-200 border-windows-gray-400 border-r-windows-gray-400 border-r-2 border-b-2"
+        "relative  flex flex-col bg-windows-gray-200 border-windows-gray-400 border-r-black border-r-2 border-b-2 border-l-windows-white border-t-windows-white border-t-2 border-l-2"
       )}
     >
       {children}
@@ -26,7 +27,7 @@ export function Window<T extends ElementType = "div">({
 Window.Header = function WindowHeader({ children, className }: ComponentPropsWithoutRef<"div">) {
   return (
     <div className={clsx(className, "bg-windows-blue text-windows-white flex items-center")}>
-      <span className="mr-auto">{children}</span>
+      <span className="ml-1 mr-auto">{children}</span>
       <Button variant="windows" className="w-4 h-4">
         ?
       </Button>
@@ -37,12 +38,20 @@ Window.Header = function WindowHeader({ children, className }: ComponentPropsWit
   );
 };
 Window.Toolbar = function WindowHeader({ children, className }: ComponentPropsWithoutRef<"div">) {
-  return <div className={clsx("", className)}>{children}</div>;
+  return (
+    <div
+      className={clsx(
+        "border-2 border-r-0 border-t-windows-white border-l-windows-white border-b-windows-gray-400",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
 };
 
 const bodyVariants = {
   grid: "grid grid-cols-4 grid-rows-4 grid-flow-col gap-4",
-  window: "grid",
 };
 Window.Body = function WindowBody({
   children,
@@ -50,7 +59,11 @@ Window.Body = function WindowBody({
   variant,
 }: ComponentPropsWithoutRef<"div"> & { variant?: keyof typeof bodyVariants }) {
   return (
-    <div className={clsx(className, "flex-auto  overflow-y-auto ", variant && bodyVariants[variant])}>{children}</div>
+    <div
+      className={clsx(className, "flex-auto overflow-y-auto  bg-windows-gray-400", variant && bodyVariants[variant])}
+    >
+      {children}
+    </div>
   );
 };
 

@@ -14,12 +14,13 @@ import address from "../../public/icons/address16.png";
 import signatureno from "../../public/icons/signatureno16.png";
 import outlooktack from "../../public/icons/outlooktack16.png";
 import envelopeclosed from "../../public/icons/envelopeclosed16.png";
-import template from "../../public/icons/template16.png";
+import mailbox48 from "../../public/icons/mailbox48.png";
 import Link from "next/link";
 import { ReactNode } from "react";
 import { EB_Garamond } from "next/font/google";
 import Icon from "../UI/Icon";
 import MenuDropdown from "../UI/MenuDropdown";
+import Divider from "../UI/Divider";
 
 const ebGaramond = EB_Garamond({
   weight: ["400", "500", "600", "700", "800"],
@@ -118,22 +119,14 @@ function Tree() {
 
 function Navbar() {
   return (
-    <div className="flex border-2 border-r-0 border-t-windows-white border-l-windows-white border-b-windows-gray-400">
+    <div className="flex gap-2 ml-1">
       <MenuDropdown menuButton={{ title: "Open" }}>
-        <Button variant="toolbar" className="leading-none text-sm py-1 px-2 tracking-tight">
-          Received
-        </Button>
-        <Button variant="toolbar" className="leading-none text-sm py-1 px-2 tracking-tight">
-          Sent
-        </Button>
+        <Button variant="toolbar">Received</Button>
+        <Button variant="toolbar">Sent</Button>
       </MenuDropdown>
       <MenuDropdown menuButton={{ title: "view" }}>
-        <Button variant="toolbar" className="leading-none text-sm py-1 px-2 tracking-tight">
-          Tiles
-        </Button>
-        <Button variant="toolbar" className="leading-none text-sm py-1 px-2 tracking-tight">
-          List
-        </Button>
+        <Button variant="toolbar">Tiles</Button>
+        <Button variant="toolbar">List</Button>
       </MenuDropdown>
     </div>
   );
@@ -153,18 +146,13 @@ function Quicklinks() {
 
 function Body({ children }: { children: ReactNode }) {
   return (
-    <div className={`flex flex-col p-2 sm:flex-row bg-windows-gray-200 gap-1  `}>
+    <div className={`flex flex-col  sm:flex-row bg-windows-gray-200 gap-1  h-full w-full `}>
       <div className="bg-windows-gray-400 flex flex-col border-2 border-t-black border-l-black border-r-windows-white border-b-windows-white">
-        <div className="bg-windows-gray-200  px-2 sm:px-10 border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+        <div className="bg-windows-gray-200  px-2 sm:px-6 border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
           <p className="tracking-tight text-center text-sm ">Outlook</p>
         </div>
         <div className="h-full flex flex-row sm:flex-col flex-wrap  justify-around mb-auto">
-          <Icon
-            name="Inbox (50)"
-            href="/inbox"
-            icon={template}
-            className="text-windows-white capitalize tracking-tight"
-          />
+          <Icon name="Inbox" href="/inbox" icon={mailbox48} className="text-windows-white capitalize tracking-tight" />
           <Icon
             name="Calendar"
             href="/inbox/calendar"
@@ -196,10 +184,10 @@ function Body({ children }: { children: ReactNode }) {
             className="text-windows-white capitalize tracking-tight"
           />
         </div>
-        <div className="bg-windows-gray-200 px-2 sm:px-10  border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+        <div className="bg-windows-gray-200 px-2 sm:px-6  border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
           <p className="tracking-tight text-center text-sm">Mail</p>
         </div>
-        <div className="bg-windows-gray-200 px-2 sm:px-10 border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
+        <div className="bg-windows-gray-200 px-2 sm:px-6 border-2 border-t-windows-white border-l-windows-white border-r-black border-b-black">
           <p className="tracking-tight text-center text-sm ">Other</p>
         </div>
       </div>
@@ -224,12 +212,13 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <Window className="w-full h-[calc(100vh-36px)]">
       <Window.Header>Inbox</Window.Header>
-      <Window.Toolbar className="px-0 py-0">
+      <Window.Toolbar>
         <Navbar />
+        <Divider />
         {/* <Quicklinks /> */}
       </Window.Toolbar>
       <Window.Body
-        variant="window"
+        // variant="window"
         className="bg-windows-white  border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]"
       >
         <Body>{children}</Body>

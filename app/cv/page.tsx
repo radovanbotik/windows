@@ -14,6 +14,7 @@ import { useDocContext } from "./context";
 import { fontLookup, sizeLookup, sizes, fonts } from "../lib/worddata";
 import { ComponentPropsWithoutRef, ReactNode } from "react";
 import MenuDropdown from "../UI/MenuDropdown";
+import Divider from "../UI/Divider";
 
 const shortcuts = [
   {
@@ -43,7 +44,7 @@ const shortcuts = [
 
 function Navbar() {
   return (
-    <div className="space-x-4  border-b-2 border-b-stone-500">
+    <div className="flex gap-2 ml-1">
       <MenuDropdown menuButton={{ title: "File" }}>
         <Button variant="toolbar">New Document</Button>
         <a className="px-1 text-sm" href="/radovan_botik_en.pdf" download={true}>
@@ -86,7 +87,7 @@ function TextPreferences() {
   const context = useDocContext();
 
   return (
-    <div className="flex flex-wrap gap-2 items-center ">
+    <div className="flex flex-wrap gap-2 items-center ml-1 py-1">
       <div className="flex gap-2 flex-wrap ">
         <Select options={fonts} value={context.font} onChange={context?.changeFont} />
         <Select options={sizes} value={context.size} onChange={context?.changeSize} />
@@ -264,6 +265,7 @@ export default function page() {
       <Window.Header>CV</Window.Header>
       <Window.Toolbar>
         <Navbar />
+        <Divider />
         {/* <Toolbar /> */}
         <TextPreferences />
       </Window.Toolbar>

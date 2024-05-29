@@ -9,22 +9,24 @@ export default function page() {
       <Window className="w-full h-full">
         <Window.Header>Recycle Bin</Window.Header>
         <Window.Toolbar>
-          <MenuDropdown menuButton={{ title: "View" }}>
-            <Button variant="toolbar" onClick={() => console.log("Tiles")}>
-              Tiles
-            </Button>
-            <Button variant="toolbar" onClick={() => console.log("List")}>
-              List
-            </Button>
-          </MenuDropdown>
-          <MenuDropdown menuButton={{ title: "Options" }}>
-            <Button variant="toolbar" onClick={() => console.log("Emptied")}>
-              Empty Recyclebin
-            </Button>
-            <Button variant="toolbar" onClick={() => console.log("Restored")}>
-              Restore Items
-            </Button>
-          </MenuDropdown>
+          <div className="flex gap-2 ml-1">
+            <MenuDropdown menuButton={{ title: "View" }}>
+              <Button variant="toolbar" onClick={() => console.log("Tiles")}>
+                Tiles
+              </Button>
+              <Button variant="toolbar" onClick={() => console.log("List")}>
+                List
+              </Button>
+            </MenuDropdown>
+            <MenuDropdown menuButton={{ title: "Options" }}>
+              <Button variant="toolbar" onClick={() => console.log("Emptied")}>
+                Empty Recyclebin
+              </Button>
+              <Button variant="toolbar" onClick={() => console.log("Restored")}>
+                Restore Items
+              </Button>
+            </MenuDropdown>
+          </div>
         </Window.Toolbar>
         <Window.Body className="bg-windows-white p-2 border-b-windows-gray border-r-windows-gray border-r-2 border-b-2 shadow-[inset_2px_2px_0px_0px_#000]"></Window.Body>
         <Window.Footer className="flex gap-1">

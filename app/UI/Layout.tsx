@@ -16,7 +16,7 @@ import { useGlobalContext } from "../context";
 export const icons = [
   {
     name: "My Computer",
-    href: "mycomputer",
+    href: "/mycomputer",
     icon: computer,
   },
   {

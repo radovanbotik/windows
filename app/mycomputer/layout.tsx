@@ -17,7 +17,7 @@ export default function layout({ children }: { children: ReactNode }) {
       <Window.Header>My Computer</Window.Header>
       <Window.Toolbar>
         <div className="py-1 px-1 flex">
-          <div className="w-20"></div>
+          {/* <div className="w-20"></div> */}
           <div className="flex-auto text-black text-md px-1  bg-windows-white border-2 border-b-[#FFFFFF] border-l-[#808080] border-t-[#808080] border-r-[#FFFFFF] shadow-[1px_1px_0px_0px_#0000007f]">
             {pathname}
           </div>

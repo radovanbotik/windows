@@ -79,7 +79,7 @@ function Tile({
 
 function Toolbar({ handleSelect }: { handleSelect: (arg: "tiles" | "list" | "extraLarge") => void }) {
   return (
-    <>
+    <div className="flex gap-2 ml-1">
       <MenuDropdown menuButton={{ title: "View" }}>
         <Button variant="toolbar" onClick={() => handleSelect("tiles")}>
           View as Tiles
@@ -95,7 +95,7 @@ function Toolbar({ handleSelect }: { handleSelect: (arg: "tiles" | "list" | "ext
         <Button variant="toolbar">Get help</Button>
         <Button variant="toolbar">Info</Button>
       </MenuDropdown>
-    </>
+    </div>
   );
 }
 
