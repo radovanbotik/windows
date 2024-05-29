@@ -60,7 +60,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         {xpTheme && <Image src={windowsxp} alt="" fill aria-hidden="true" className="object-cover w-full h-full" />}
       </div>
       <div className="relative h-full flex flex-col w-full">
-        <div className="relative h-[calc(100vh-36px)]">
+        <div className="relative h-[calc(100%-36px)]">
           <div
             className={clsx(
               isBackground && "z-10",
