@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/media-player/playlist",
+        destination: "/media-player",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
